@@ -3,17 +3,13 @@ import 'package:get/get.dart';
 import '/pages/home/home_state.dart';
 import '/pages/home/home_logic.dart';
 
-class SearchBarWidget extends StatelessWidget {
+class HomeSearchBarWidget extends StatelessWidget implements PreferredSize {
   final HomeLogic logic = Get.put(HomeLogic());
   final HomeState state = Get.find<HomeLogic>().state;
 
-  @override
-  Widget build(BuildContext context) {
+  Widget buildSearchBar() {
     return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 12,
-        vertical: 10,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
           color: Get.theme.primaryColor,
           border: Border.all(
@@ -28,7 +24,7 @@ class SearchBarWidget extends StatelessWidget {
           ),
           Expanded(
             child: Text(
-              "输入搜索内容".tr,
+              "Search for handyman...".tr,
               maxLines: 1,
               softWrap: false,
               overflow: TextOverflow.fade,
@@ -52,7 +48,7 @@ class SearchBarWidget extends StatelessWidget {
                 spacing: 4,
                 children: [
                   Text(
-                    "筛选".tr,
+                    "Filter".tr,
                     style: TextStyle(color: Get.theme.hintColor),
                   ),
                   Icon(
@@ -63,9 +59,20 @@ class SearchBarWidget extends StatelessWidget {
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return buildSearchBar();
+  }
+
+  @override
+  Widget get child => buildSearchBar();
+
+  @override
+  Size get preferredSize => Size(Get.width, 80);
 }
