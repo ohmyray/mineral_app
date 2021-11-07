@@ -5,7 +5,7 @@ import 'map_logic.dart';
 import 'map_state.dart';
 
 /// @description:
-/// @author 
+/// @author
 /// @date: 2021/11/07 10:04:13
 class MapPage extends StatelessWidget {
   final MapLogic logic = Get.put(MapLogic());
@@ -13,6 +13,10 @@ class MapPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Container(
+        child: Text('map'),
+      ),
+    );
   }
 }

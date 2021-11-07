@@ -5,7 +5,7 @@ import 'login_logic.dart';
 import 'login_state.dart';
 
 /// @description:
-/// @author 
+/// @author
 /// @date: 2021/11/07 08:40:27
 class LoginPage extends StatelessWidget {
   final LoginLogic logic = Get.put(LoginLogic());
@@ -13,6 +13,10 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Container(
+        child: Text('login'),
+      ),
+    );
   }
 }
