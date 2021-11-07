@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '/common/widgets/search_bar_widget.dart';
 
 import 'home_logic.dart';
 import 'home_state.dart';
@@ -12,7 +13,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: Text('home'),
+        child: SearchBarWidget(),
       ),
     );
   }
