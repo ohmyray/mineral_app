@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '/pages/root/root_view.dart';
 import '/global.dart';
+import '/common/style/style.dart';
+import '/common/routes/routes.dart';
+import '/common/utils/utils.dart';
 
 Future<void> main() async {
   await Global.init();
@@ -20,13 +24,22 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       builder: () => RefreshConfiguration(
+        headerBuilder: () => ClassicHeader(),
+        footerBuilder: () => ClassicFooter(),
+        hideFooterWhenNotFull: true,
+        headerTriggerDistance: 80,
+        maxOverScrollExtent: 100,
+        footerTriggerDistance: 150,
         child: GetMaterialApp(
           title: 'Flutter Demo',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
+          theme: AppTheme.light,
           debugShowCheckedModeBanner: false,
-          home: RootPage(),
+          getPages: AppPages.routes,
+          initialRoute: AppPages.INITIAL,
+          builder: EasyLoading.init(),
+          navigatorObservers: [AppPages.observer],
+          enableLog: true,
+          logWriterCallback: Logger.write,
         ),
       ),
     );
