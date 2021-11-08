@@ -1,70 +1,80 @@
 // 注册请求
 class UserRegisterRequestEntity {
-  String email;
+  String loginName;
   String password;
+  String userDevice;
 
   UserRegisterRequestEntity({
-    this.email,
+    this.loginName,
     this.password,
+    this.userDevice,
   });
 
   factory UserRegisterRequestEntity.fromJson(Map<String, dynamic> json) =>
       UserRegisterRequestEntity(
-        email: json["email"],
+        loginName: json["loginName"],
         password: json["password"],
+        userDevice: json["userDevice"],
       );
 
   Map<String, dynamic> toJson() => {
-        "email": email,
+        "loginName": loginName,
         "password": password,
+        "userDevice": userDevice,
       };
 }
 
 // 登录请求
 class UserLoginRequestEntity {
-  String email;
+  String loginName;
   String password;
+  String userDevice;
 
   UserLoginRequestEntity({
-    this.email,
+    this.loginName,
     this.password,
+    this.userDevice,
   });
 
   factory UserLoginRequestEntity.fromJson(Map<String, dynamic> json) =>
       UserLoginRequestEntity(
-        email: json["email"],
+        loginName: json["loginName"],
         password: json["password"],
+        userDevice: json["userDevice"],
       );
 
   Map<String, dynamic> toJson() => {
-        "email": email,
+        "loginName": loginName,
         "password": password,
+        "userDevice": userDevice,
       };
 }
 
 // 登录返回
 class UserLoginResponseEntity {
-  String accessToken;
-  String displayName;
-  List<String> channels;
+  int code;
+  String message;
+  String result;
 
   UserLoginResponseEntity({
-    this.accessToken,
-    this.displayName,
-    this.channels,
+    this.code,
+    this.message,
+    this.result,
   });
 
   factory UserLoginResponseEntity.fromJson(Map<String, dynamic> json) =>
       UserLoginResponseEntity(
-        accessToken: json["access_token"],
-        displayName: json["display_name"],
-        channels: List<String>.from(json["channels"].map((x) => x)),
+        code: json["code"],
+        message: json["message"],
+        result: json["result"],
+        // channels: List<String>.from(json["channels"].map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
-        "access_token": accessToken,
-        "display_name": displayName,
-        "channels":
-            channels == null ? [] : List<dynamic>.from(channels?.map((x) => x)),
+        "code": code,
+        "message": message,
+        "result": result,
+        // "channels":
+        //     channels == null ? [] : List<dynamic>.from(channels?.map((x) => x)),
       };
 }
