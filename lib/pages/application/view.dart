@@ -9,27 +9,27 @@ import 'index.dart';
 
 class ApplicationPage extends GetView<ApplicationController> {
   // 顶部导航
-  AppBar _buildAppBar() {
-    return transparentAppBar(
-        title: Obx(() => Text(
-              "1231231",
-              style: TextStyle(
-                color: AppColors.primaryText,
-                fontFamily: 'Montserrat',
-                fontSize: 18.sp,
-                fontWeight: FontWeight.w600,
-              ),
-            )),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.search,
-              color: AppColors.primaryText,
-            ),
-            onPressed: () {},
-          )
-        ]);
-  }
+  // AppBar _buildAppBar() {
+  //   return transparentAppBar(
+  //       title: Obx(() => Text(
+  //             "1231231",
+  //             style: TextStyle(
+  //               color: AppColors.primaryText,
+  //               fontFamily: 'Montserrat',
+  //               fontSize: 18.sp,
+  //               fontWeight: FontWeight.w600,
+  //             ),
+  //           )),
+  //       actions: <Widget>[
+  //         IconButton(
+  //           icon: Icon(
+  //             Icons.search,
+  //             color: AppColors.primaryText,
+  //           ),
+  //           onPressed: () {},
+  //         )
+  //       ]);
+  // }
 
   // 内容页
   Widget _buildPageView() {
@@ -38,7 +38,22 @@ class ApplicationPage extends GetView<ApplicationController> {
       children: <Widget>[
         // MainPage(),
         // CategoryPage(),
-        // cardWidget(),
+        GestureDetector(
+          onTap: () {},
+          child: cardWidget('adfasfsfs', 100, 100),
+        ),
+        GestureDetector(
+          onTap: () {},
+          child: cardWidget('adfasfsfs', 100, 100),
+        ),
+        GestureDetector(
+          onTap: () {},
+          child: cardWidget('adfasfsfs', 100, 100),
+        ),
+        GestureDetector(
+          onTap: () {},
+          child: cardWidget('adfasfsfs', 100, 100),
+        ),
       ],
       // controller: controller.pageController,
       // onPageChanged: controller.handlePageChanged,
@@ -61,7 +76,7 @@ class ApplicationPage extends GetView<ApplicationController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
+      // appBar: _buildAppBar(),
       body: _buildPageView(),
       // bottomNavigationBar: _buildBottomNavigationBar(),
     );

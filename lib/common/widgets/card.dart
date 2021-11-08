@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
-Widget cardWidget(
-  VoidCallback onTap,
-) {
+Widget cardWidget(String title, double width, double height) {
   return GestureDetector(
-    onTap: onTap,
     child: Card(
       color: Colors.blueAccent,
       //z轴的高度，设置card的阴影
@@ -16,19 +13,19 @@ Widget cardWidget(
       //对Widget截取的行为，比如这里 Clip.antiAlias 指抗锯齿
       clipBehavior: Clip.antiAlias,
       semanticContainer: false,
-      child: getChild(),
+      child: getChild(title, width, height),
     ),
   );
 }
 
-getChild() {
+getChild(title, width, height) {
   return Container(
     color: Colors.deepPurpleAccent,
     width: 200,
     height: 150,
     alignment: Alignment.center,
     child: Text(
-      "Card",
+      title,
       style: TextStyle(fontSize: 28, color: Colors.white),
     ),
   );
