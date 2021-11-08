@@ -99,7 +99,7 @@ class SignInPage extends GetView<SignInController> {
           inputTextEdit(
             controller: controller.passController,
             keyboardType: TextInputType.visiblePassword,
-            hintText: "密码",
+            hintText: "密    码",
             isPassword: true,
           ),
 

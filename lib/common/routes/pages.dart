@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '/pages/frame/sign_up/bindings.dart';
+import '/pages/frame/sign_up/index.dart';
+
 import '/common/middlewares/middlewares.dart';
 import '/pages/frame/sign_in/index.dart';
 
@@ -17,9 +20,11 @@ class AppPages {
       name: AppRoutes.INITIAL,
       page: () => SignInPage(),
       binding: SignInBinding(),
-      middlewares: [
-        // RouteWelcomeMiddleware(priority: 1),
-      ],
+    ),
+    GetPage(
+      name: AppRoutes.SIGN_UP,
+      page: () => SignUpPage(),
+      binding: SignUpBinding(),
     ),
     // 需要登录
     // GetPage(

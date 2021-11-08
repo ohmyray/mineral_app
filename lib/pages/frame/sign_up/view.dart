@@ -11,16 +11,58 @@ class SignUpPage extends GetView<SignUpController> {
   Widget _buildLogo() {
     return Container(
       margin: EdgeInsets.only(top: 50.h),
-      child: Text(
-        "Sign up",
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          color: AppColors.primaryText,
-          fontFamily: "Montserrat",
-          fontWeight: FontWeight.w600,
-          fontSize: 24.sp,
-          height: 1,
-        ),
+      child: Column(
+        children: [
+          Positioned(
+            left: 0,
+            top: 0,
+            right: 0,
+            child: Container(
+              // height: 76.w,
+              decoration: BoxDecoration(
+                color: AppColors.primaryBackground,
+                boxShadow: const [
+                  Shadows.primaryShadow,
+                ],
+                borderRadius:
+                    BorderRadius.all(Radius.circular((76 * 0.5).w)), // 父容器的50%
+              ),
+              child: Container(),
+            ),
+          ),
+          Positioned(
+            top: 13.w,
+            child: Image.asset(
+              "assets/images/logo.png",
+              fit: BoxFit.none,
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 15.h),
+            child: Text(
+              "MINERAL",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: AppColors.primaryText,
+                fontFamily: "Montserrat",
+                fontWeight: FontWeight.w600,
+                fontSize: 24.sp,
+                height: 1,
+              ),
+            ),
+          ),
+          Text(
+            "注 册",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: AppColors.primaryText,
+              fontFamily: "Montserrat",
+              fontWeight: FontWeight.w600,
+              fontSize: 24.sp,
+              height: 1,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -37,20 +79,20 @@ class SignUpPage extends GetView<SignUpController> {
           inputTextEdit(
             controller: controller.fullnameController,
             keyboardType: TextInputType.text,
-            hintText: "Full name",
+            hintText: "用户名",
             marginTop: 0,
           ),
           // email input
           inputTextEdit(
             controller: controller.emailController,
             keyboardType: TextInputType.emailAddress,
-            hintText: "Email",
+            hintText: "手机号",
           ),
           // password input
           inputTextEdit(
             controller: controller.passController,
             keyboardType: TextInputType.visiblePassword,
-            hintText: "Password",
+            hintText: "密    码",
             isPassword: true,
           ),
 
@@ -62,77 +104,29 @@ class SignUpPage extends GetView<SignUpController> {
               onPressed: controller.handleSignUp,
               width: 295.w,
               fontWeight: FontWeight.w600,
-              title: "Create an account",
+              title: "创 建 账 号",
             ),
           ),
           // Spacer(),
 
           // Fogot password
-          Padding(
-            padding: EdgeInsets.only(top: 8.0),
-            child: TextButton(
-              onPressed: controller.handleFogotPassword,
-              child: Text(
-                "Fogot password?",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: AppColors.secondaryElementText,
-                  fontFamily: "Avenir",
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16.sp,
-                  height: 1, // 设置下行高，否则字体下沉
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  // 第三方
-  Widget _buildThirdPartyLogin() {
-    return Container(
-      width: 295.w,
-      margin: EdgeInsets.only(bottom: 40.h),
-      child: Column(
-        children: <Widget>[
-          // title
-          Text(
-            "Or sign in with social networks",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: AppColors.primaryText,
-              fontFamily: "Avenir",
-              fontWeight: FontWeight.w400,
-              fontSize: 16.sp,
-            ),
-          ),
-          // 按钮
-          Padding(
-            padding: EdgeInsets.only(top: 20.h),
-            child: Row(
-              children: <Widget>[
-                btnFlatButtonBorderOnlyWidget(
-                  onPressed: () {},
-                  width: 88,
-                  iconFileName: "twitter",
-                ),
-                Spacer(),
-                btnFlatButtonBorderOnlyWidget(
-                  onPressed: () {},
-                  width: 88,
-                  iconFileName: "google",
-                ),
-                Spacer(),
-                btnFlatButtonBorderOnlyWidget(
-                  onPressed: () {},
-                  width: 88,
-                  iconFileName: "facebook",
-                ),
-              ],
-            ),
-          ),
+          // Padding(
+          //   padding: EdgeInsets.only(top: 8.0),
+          //   child: TextButton(
+          //     onPressed: controller.handleFogotPassword,
+          //     child: Text(
+          //       "Fogot password?",
+          //       textAlign: TextAlign.center,
+          //       style: TextStyle(
+          //         color: AppColors.secondaryElementText,
+          //         fontFamily: "Avenir",
+          //         fontWeight: FontWeight.w400,
+          //         fontSize: 16.sp,
+          //         height: 1, // 设置下行高，否则字体下沉
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
@@ -147,7 +141,7 @@ class SignUpPage extends GetView<SignUpController> {
         width: 294,
         gbColor: AppColors.secondaryElement,
         fontColor: AppColors.primaryText,
-        title: "I have an account",
+        title: "已 有 账 号",
         fontWeight: FontWeight.w500,
         fontSize: 16,
       ),
@@ -160,7 +154,7 @@ class SignUpPage extends GetView<SignUpController> {
       resizeToAvoidBottomInset: false,
       appBar: transparentAppBar(
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: AppColors.primaryText,
           ),
@@ -168,7 +162,7 @@ class SignUpPage extends GetView<SignUpController> {
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.info_outline,
               color: AppColors.primaryText,
             ),
@@ -179,11 +173,10 @@ class SignUpPage extends GetView<SignUpController> {
       body: Center(
         child: Column(
           children: <Widget>[
-            Divider(height: 1),
+            const Divider(height: 1),
             _buildLogo(),
             _buildInputForm(),
-            Spacer(),
-            _buildThirdPartyLogin(),
+            const Spacer(),
             _buildHaveAccountButton(),
           ],
         ),
