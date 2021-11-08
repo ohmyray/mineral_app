@@ -111,14 +111,14 @@ class SignInController extends GetxController {
 
   // 执行登录操作
   handleSignIn() async {
-    // if (!duIsEmail(_emailController.value.text)) {
-    //   toastInfo(msg: '请正确输入邮件');
-    //   return;
-    // }
-    // if (!duCheckStringLength(_passController.value.text, 6)) {
-    //   toastInfo(msg: '密码不能小于6位');
-    //   return;
-    // }
+    if (emailController.value.text.isEmpty) {
+      toastInfo(msg: '请正确输入用户名');
+      return;
+    }
+    if (!duCheckStringLength(passController.value.text, 6)) {
+      toastInfo(msg: '密码不能小于6位');
+      return;
+    }
 
     UserLoginRequestEntity params = UserLoginRequestEntity(
       loginName: emailController.value.text,

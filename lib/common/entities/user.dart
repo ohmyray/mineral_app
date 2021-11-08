@@ -79,7 +79,7 @@ class UserLoginRequestEntity {
 class UserLoginResponseEntity {
   int code;
   String message;
-  String result;
+  dynamic result;
 
   UserLoginResponseEntity({
     this.code,
