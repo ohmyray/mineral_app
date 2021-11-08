@@ -127,9 +127,9 @@ class SignUpController extends GetxController {
     // }
 
     UserRegisterRequestEntity params = UserRegisterRequestEntity(
-      loginName: emailController.value.text,
+      loginName: fullnameController.value.text,
+      userPhone: emailController.value.text,
       password: passController.value.text,
-      userDevice: platformDeviceId,
       // password: duSHA256(passController.value.text),
     );
 

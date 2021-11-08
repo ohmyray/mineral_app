@@ -2,25 +2,25 @@
 class UserRegisterRequestEntity {
   String loginName;
   String password;
-  String userDevice;
+  String userPhone;
 
   UserRegisterRequestEntity({
     this.loginName,
     this.password,
-    this.userDevice,
+    this.userPhone,
   });
 
   factory UserRegisterRequestEntity.fromJson(Map<String, dynamic> json) =>
       UserRegisterRequestEntity(
         loginName: json["loginName"],
         password: json["password"],
-        userDevice: json["userDevice"],
+        userPhone: json["userPhone"],
       );
 
   Map<String, dynamic> toJson() => {
         "loginName": loginName,
         "password": password,
-        "userDevice": userDevice,
+        "userPhone": userPhone,
       };
 }
 

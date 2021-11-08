@@ -19,7 +19,7 @@ class UserAPI {
     UserRegisterRequestEntity params,
   }) async {
     var response = await HttpUtil().post(
-      '/user/register',
+      '/user/registry',
       data: params?.toJson(),
     );
     return UserRegisterRequestEntity.fromJson(response);
