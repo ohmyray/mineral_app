@@ -144,7 +144,17 @@ class SignUpController extends GetxController {
         return;
       }
       if (userProfile.code == 2000) {
-        Get.back();
+        UserInitRequestEntity params = UserInitRequestEntity(
+          loginName: fullnameController.value.text,
+          userDevice: platformDeviceId,
+          password: passController.value.text,
+          // password: duSHA256(passController.value.text),
+        );
+        UserAPI.init(
+          params: params,
+        ).then((value) {
+          Get.back();
+        });
       }
     });
   }

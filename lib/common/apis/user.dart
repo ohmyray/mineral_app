@@ -25,6 +25,16 @@ class UserAPI {
     return UserRegisterResponseEntity.fromJson(response);
   }
 
+  static Future<UserInitResponseEntity> init({
+    UserInitRequestEntity params,
+  }) async {
+    var response = await HttpUtil().post(
+      '/user/init',
+      data: params?.toJson(),
+    );
+    return UserInitResponseEntity.fromJson(response);
+  }
+
   /// Profile
   static Future<UserLoginResponseEntity> profile() async {
     var response = await HttpUtil().post(

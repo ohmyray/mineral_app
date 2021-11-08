@@ -100,3 +100,54 @@ class UserLoginResponseEntity {
         "result": result,
       };
 }
+
+// 用户初始化
+class UserInitRequestEntity {
+  String loginName;
+  String password;
+  String userDevice;
+
+  UserInitRequestEntity({
+    this.loginName,
+    this.password,
+    this.userDevice,
+  });
+
+  factory UserInitRequestEntity.fromJson(Map<String, dynamic> json) =>
+      UserInitRequestEntity(
+        loginName: json["loginName"],
+        password: json["password"],
+        userDevice: json["userDevice"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "loginName": loginName,
+        "password": password,
+        "userDevice": userDevice,
+      };
+}
+
+class UserInitResponseEntity {
+  int code;
+  String message;
+  dynamic result;
+
+  UserInitResponseEntity({
+    this.code,
+    this.message,
+    this.result,
+  });
+
+  factory UserInitResponseEntity.fromJson(Map<String, dynamic> json) =>
+      UserInitResponseEntity(
+        code: json["code"],
+        message: json["message"],
+        result: json["result"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "code": code,
+        "message": message,
+        "result": result,
+      };
+}
