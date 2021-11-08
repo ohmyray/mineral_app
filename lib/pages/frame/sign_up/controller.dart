@@ -1,8 +1,10 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import '/common/apis/apis.dart';
 import '/common/entities/entities.dart';
 import '/common/utils/utils.dart';
@@ -112,7 +114,8 @@ class SignUpController extends GetxController {
   }
 
   // 执行注册操作
-  handleSignUp() async {
+  handleSignUp() {
+    EasyLoading.showProgress(10, maskType: EasyLoadingMaskType.black);
     // if (!duCheckStringLength(fullnameController.value.text, 5)) {
     //   toastInfo(msg: '用户名不能小于5位');
     //   return;
@@ -133,11 +136,17 @@ class SignUpController extends GetxController {
       // password: duSHA256(passController.value.text),
     );
 
-    await UserAPI.register(
+    UserAPI.register(
       params: params,
-    );
-
-    Get.back();
+    ).then((userProfile) {
+      if (userProfile.code == 1000 && userProfile.message == '请求失败') {
+        EasyLoading.showError(userProfile.result);
+        return;
+      }
+      if (userProfile.code == 2000) {
+        Get.back();
+      }
+    });
   }
 
   /// 生命周期

@@ -15,14 +15,14 @@ class UserAPI {
   }
 
   /// 注册
-  static Future<UserRegisterRequestEntity> register({
+  static Future<UserRegisterResponseEntity> register({
     UserRegisterRequestEntity params,
   }) async {
     var response = await HttpUtil().post(
       '/user/registry',
       data: params?.toJson(),
     );
-    return UserRegisterRequestEntity.fromJson(response);
+    return UserRegisterResponseEntity.fromJson(response);
   }
 
   /// Profile

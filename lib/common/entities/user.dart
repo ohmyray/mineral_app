@@ -24,6 +24,31 @@ class UserRegisterRequestEntity {
       };
 }
 
+class UserRegisterResponseEntity {
+  int code;
+  String message;
+  dynamic result;
+
+  UserRegisterResponseEntity({
+    this.code,
+    this.message,
+    this.result,
+  });
+
+  factory UserRegisterResponseEntity.fromJson(Map<String, dynamic> json) =>
+      UserRegisterResponseEntity(
+        code: json["code"],
+        message: json["message"],
+        result: json["result"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "code": code,
+        "message": message,
+        "result": result,
+      };
+}
+
 // 登录请求
 class UserLoginRequestEntity {
   String loginName;
@@ -67,14 +92,11 @@ class UserLoginResponseEntity {
         code: json["code"],
         message: json["message"],
         result: json["result"],
-        // channels: List<String>.from(json["channels"].map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
         "code": code,
         "message": message,
         "result": result,
-        // "channels":
-        //     channels == null ? [] : List<dynamic>.from(channels?.map((x) => x)),
       };
 }
