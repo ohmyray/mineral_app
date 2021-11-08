@@ -38,6 +38,32 @@ dependencies:
   flutter_map: 0.14.0
   latlong2: 0.8.1
 
+  # 加密安全 SHA
+  crypto: ^3.0.1
+
+  # 包信息
+  package_info: ^2.0.0
+
+  # easyloading
+  flutter_easyloading: ^3.0.3
+
+  # http
+  dio: ^4.0.0
+  dio_cookie_manager: ^2.0.0
+  cookie_jar: ^3.0.1
+
+  # 下拉刷新
+  pull_to_refresh: ^2.0.0
+
+  # 屏幕适配
+  flutter_screenutil: ^5.0.0+2
+  
+  # 缓存
+  shared_preferences: ^2.0.5
+  cached_network_image: ^3.0.0
+  flutter_cache_manager: ^3.0.2
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

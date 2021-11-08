@@ -13,37 +13,51 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: RefreshIndicator(
-      onRefresh: () async {},
-      child: CustomScrollView(
-        primary: true,
-        shrinkWrap: false,
-        slivers: <Widget>[
-          SliverAppBar(
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            expandedHeight: 100,
-            elevation: 0.5,
-            floating: true,
-            iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
-            title: Text(
-              "App Name".tr,
-              style: Get.textTheme.headline6,
-            ),
-            // title: Text(
-            //   Get.find<SettingsService>().setting.value.appName,
-            //   style: Get.textTheme.headline6,
-            // ),
-            centerTitle: true,
-            automaticallyImplyLeading: false,
-            leading: IconButton(
-              icon: const Icon(Icons.sort, color: Colors.black87),
-              onPressed: () => {Scaffold.of(context).openDrawer()},
-            ),
-            // actions: [NotificationsButtonWidget()],
-            bottom: HomeSearchBarWidget(),
-          )
+      body: Stack(
+        children: [
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: const [
+              Text(
+                "AAAAAA",
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.w500,
+                ),
+              )
+            ],
+          ),
+          Expanded(
+              child: ListView.builder(
+                  itemCount: 4,
+                  itemBuilder: (_, i) {
+                    return Row(
+                      children: [
+                        Container(
+                          width: 200,
+                          height: 170,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Colors.white,
+                              boxShadow: const [
+                                BoxShadow(
+                                  blurRadius: 3,
+                                  offset: Offset(5, 5),
+                                  color: Colors.grey,
+                                ),
+                                BoxShadow(
+                                  blurRadius: 3,
+                                  offset: Offset(-5, -5),
+                                  color: Colors.grey,
+                                )
+                              ]),
+                          child: Center(child: Text('glues')),
+                        )
+                      ],
+                    );
+                  }))
         ],
       ),
-    ));
+    );
   }
 }
