@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '/pages/frame/sign_up/bindings.dart';
+import '/pages/application/index.dart';
 import '/pages/frame/sign_up/index.dart';
+import '/pages/frame/sign_in/index.dart';
 
 import '/common/middlewares/middlewares.dart';
-import '/pages/frame/sign_in/index.dart';
 
 import 'routes.dart';
 
@@ -27,13 +27,13 @@ class AppPages {
       binding: SignUpBinding(),
     ),
     // 需要登录
-    // GetPage(
-    //   name: AppRoutes.Application,
-    //   page: () => ApplicationPage(),
-    //   binding: ApplicationBinding(),
-    //   middlewares: [
-    //     RouteAuthMiddleware(priority: 1),
-    //   ],
-    // ),
+    GetPage(
+      name: AppRoutes.Application,
+      page: () => ApplicationPage(),
+      binding: ApplicationBinding(),
+      // middlewares: [
+      //   RouteAuthMiddleware(priority: 1),
+      // ],
+    ),
   ];
 }
