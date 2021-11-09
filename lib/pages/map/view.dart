@@ -1,18 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:get/get.dart';
 
-import 'map_logic.dart';
-import 'map_state.dart';
+import 'index.dart';
 
-/// @description:
-/// @author
-/// @date: 2021/11/07 10:04:13
-class MapPage extends StatelessWidget {
-  final MapLogic logic = Get.put(MapLogic());
-  final MapState state = Get.find<MapLogic>().state;
-
+class AMapPage extends GetView<AMapController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '/pages/home/home_view.dart';
 import '/pages/setting/setting_view.dart';
-import '/pages/map/map_view.dart';
+// import '/pages/map/map_view.dart';
 
 /// @description:
 /// @author
@@ -13,7 +13,7 @@ class RootState {
   RxInt currentPageIndex;
   List<Widget> pages = [
     HomePage(),
-    MapPage(),
+    // MapPage(),
     settingPage(),
   ];
   RootState() {

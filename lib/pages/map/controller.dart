@@ -10,10 +10,10 @@ import 'package:get/get.dart';
 
 import 'index.dart';
 
-class ApplicationController extends GetxController {
+class AMapController extends GetxController {
   /// 响应式成员变量
 
-  final state = ApplicationState();
+  final state = AMapState();
 
   /// 生命周期
 

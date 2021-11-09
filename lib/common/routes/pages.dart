@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '/pages/map/index.dart';
 import '/pages/application/index.dart';
 import '/pages/frame/sign_up/index.dart';
 import '/pages/frame/sign_in/index.dart';
@@ -31,6 +32,14 @@ class AppPages {
       name: AppRoutes.Application,
       page: () => ApplicationPage(),
       binding: ApplicationBinding(),
+      // middlewares: [
+      //   RouteAuthMiddleware(priority: 1),
+      // ],
+    ),
+    GetPage(
+      name: AppRoutes.Map,
+      page: () => AMapPage(),
+      binding: AMapBinding(),
       // middlewares: [
       //   RouteAuthMiddleware(priority: 1),
       // ],

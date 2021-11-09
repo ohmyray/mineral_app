@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mineral_app/common/routes/routes.dart';
 import 'package:mineral_app/common/widgets/card.dart';
 import '/common/values/values.dart';
 import '/common/widgets/widgets.dart';
@@ -39,6 +40,7 @@ class ApplicationPage extends GetView<ApplicationController> {
         GestureDetector(
           onTap: () {
             print('资源一张图');
+            controller.toNamed(AppRoutes.Map);
           },
           child: cardWidget('资源一张图', 100, 100),
         ),
