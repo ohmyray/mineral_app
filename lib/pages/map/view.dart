@@ -39,6 +39,7 @@ class AMapPage extends GetView<AMapController> {
                       builder: (ctx) => const Icon(
                         Icons.location_on,
                         color: Colors.red,
+                        size: 40.0,
                       ),
                     ),
                   ],
