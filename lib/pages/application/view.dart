@@ -33,45 +33,38 @@ class ApplicationPage extends GetView<ApplicationController> {
 
   // 内容页
   Widget _buildPageView() {
-    return PageView(
+    return ListView(
       physics: NeverScrollableScrollPhysics(),
       children: <Widget>[
-        // MainPage(),
-        // CategoryPage(),
         GestureDetector(
-          onTap: () {},
-          child: cardWidget('adfasfsfs', 100, 100),
+          onTap: () {
+            print('资源一张图');
+          },
+          child: cardWidget('资源一张图', 100, 100),
         ),
         GestureDetector(
-          onTap: () {},
-          child: cardWidget('adfasfsfs', 100, 100),
+          onTap: () {
+            print('专题查询');
+          },
+          child: cardWidget('专题查询', 100, 100),
         ),
         GestureDetector(
-          onTap: () {},
-          child: cardWidget('adfasfsfs', 100, 100),
+          onTap: () {
+            print('分类统计');
+          },
+          child: cardWidget('分类统计', 100, 100),
         ),
         GestureDetector(
-          onTap: () {},
-          child: cardWidget('adfasfsfs', 100, 100),
+          onTap: () {
+            print('空间分析');
+          },
+          child: cardWidget('空间分析', 100, 100),
         ),
       ],
       // controller: controller.pageController,
       // onPageChanged: controller.handlePageChanged,
     );
   }
-
-  // 底部导航
-  // Widget _buildBottomNavigationBar() {
-  //   return Obx(() => BottomNavigationBar(
-  //         items: controller.bottomTabs,
-  //         currentIndex: controller.state.page,
-  //         // fixedColor: AppColors.primaryElement,
-  //         type: BottomNavigationBarType.fixed,
-  //         onTap: controller.handleNavBarTap,
-  //         showSelectedLabels: false,
-  //         showUnselectedLabels: false,
-  //       ));
-  // }
 
   @override
   Widget build(BuildContext context) {
