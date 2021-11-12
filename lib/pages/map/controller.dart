@@ -54,11 +54,15 @@ class AMapController extends GetxController {
         point: state.bzdMarkerPoints[i],
         width: 80.0,
         height: 80.0,
-        builder: (ctx) => const Icon(
-          Icons.tour,
-          color: Colors.red,
-          size: 50.0,
-        ),
+        builder: (ctx) => IconButton(
+            onPressed: () {
+              print(i);
+            },
+            icon: const Icon(
+              Icons.tour,
+              color: Colors.red,
+              size: 50.0,
+            )),
       ));
     }
     return _list;
