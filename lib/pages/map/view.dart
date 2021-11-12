@@ -3,9 +3,12 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:get/get.dart';
 
+import '/database/model/bzd.dart';
+
 import 'index.dart';
 
 class AMapPage extends GetView<AMapController> {
+  List<Marker> _bzdList = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,12 +17,21 @@ class AMapPage extends GetView<AMapController> {
           children: [
             FlutterMap(
               options: MapOptions(
-                  center: LatLng(51.5, -0.09),
-                  zoom: 13.0,
+                  center: LatLng(23.845742, 111.489864),
+                  zoom: 5.0,
                   onTap: (tapPosition, point) {
                     print('$tapPosition,$point');
                     print('$controller.state.point,$point');
                     controller.state.point = point;
+                  },
+                  onMapCreated: (mapController) async {
+                    controller.state.mapController = mapController;
+                    List<BzdModel> bzds =
+                        await controller.state.bzdProvider.getAllData();
+                    if (bzds.isNotEmpty) {
+                      _bzdList = controller.buildBzdMarker(bzds);
+                      print(_bzdList.length);
+                    }
                   }),
               layers: [
                 TileLayerOptions(
@@ -27,7 +39,7 @@ class AMapPage extends GetView<AMapController> {
                       "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                   subdomains: ['a', 'b', 'c'],
                   attributionBuilder: (_) {
-                    return Text("© OpenStreetMap contributors");
+                    return Text("Mineral");
                   },
                 ),
                 MarkerLayerOptions(
@@ -42,9 +54,26 @@ class AMapPage extends GetView<AMapController> {
                         size: 40.0,
                       ),
                     ),
+                    ..._bzdList
                   ],
                 ),
               ],
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 34.0, horizontal: 16.0),
+              child: Column(
+                children: [
+                  Card(
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30.0)),
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
           ],
         ),

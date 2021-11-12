@@ -90,10 +90,10 @@ class SignInPage extends GetView<SignInController> {
           // email input
           inputTextEdit(
             controller: controller.emailController,
-            keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.text,
             hintText: "用户名",
             marginTop: 0,
-            // autofocus: true,
+            autofocus: true,
           ),
           // password input
           inputTextEdit(
