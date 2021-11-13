@@ -11,7 +11,10 @@ class AMapState {
   BzdDbProvider bzdProvider = BzdDbProvider();
   MapController _mapController;
 
-  RxList bzdMarkerPoints = [].obs;
+  RxList _bzdListMarker = [].obs;
+
+  get bzdListMarker => _bzdListMarker.value;
+  set bzdListMarker(value) => _bzdListMarker.value = value;
 
   get point => this._point.value;
   set point(value) => this._point.value = value;

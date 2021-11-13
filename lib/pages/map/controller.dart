@@ -21,8 +21,10 @@ class AMapController extends GetxController {
   /// 生命周期
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
+    List<BzdModel> bzds = await state.bzdProvider.getAllData();
+    state.bzdListMarker = buildBzdMarker(bzds);
   }
 
   @override
@@ -47,16 +49,14 @@ class AMapController extends GetxController {
   List<Marker> buildBzdMarker(List<BzdModel> bzds) {
     List<Marker> _list = [];
     for (var column in bzds) {
-      state.bzdMarkerPoints.add(LatLng(column.YZB, column.XZB));
-    }
-    for (var i = 0; i < state.bzdMarkerPoints.length; i++) {
       _list.add(Marker(
-        point: state.bzdMarkerPoints[i],
+        point: LatLng(column.YZB, column.XZB),
         width: 80.0,
         height: 80.0,
         builder: (ctx) => IconButton(
             onPressed: () {
-              print(i);
+              print(column.BSM);
+              print(column.KQBH);
             },
             icon: const Icon(
               Icons.tour,

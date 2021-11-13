@@ -26,12 +26,11 @@ class AMapPage extends GetView<AMapController> {
                   },
                   onMapCreated: (mapController) async {
                     controller.state.mapController = mapController;
-                    List<BzdModel> bzds =
-                        await controller.state.bzdProvider.getAllData();
-                    if (bzds.isNotEmpty) {
-                      _bzdList = controller.buildBzdMarker(bzds);
-                      print(_bzdList.length);
-                    }
+
+                    // if (bzds.isNotEmpty) {
+                    //   _bzdList = controller.buildBzdMarker(bzds);
+                    //   print(_bzdList.length);
+                    // }
                   }),
               layers: [
                 TileLayerOptions(
@@ -54,7 +53,7 @@ class AMapPage extends GetView<AMapController> {
                         size: 40.0,
                       ),
                     ),
-                    ..._bzdList
+                    ...controller.state.bzdListMarker
                   ],
                 ),
               ],
