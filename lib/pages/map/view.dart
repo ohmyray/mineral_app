@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:get/get.dart';
 
@@ -24,6 +25,9 @@ class AMapPage extends GetView<AMapController> {
                     print('$controller.state.point,$point');
                     controller.state.point = point;
                   },
+                  plugins: [
+                    MarkerClusterPlugin(),
+                  ],
                   onMapCreated: (mapController) async {
                     controller.state.mapController = mapController;
 
@@ -56,6 +60,24 @@ class AMapPage extends GetView<AMapController> {
                     ...controller.state.bzdListMarker
                   ],
                 ),
+                // MarkerClusterLayerOptions(
+                //   maxClusterRadius: 120,
+                //   size: Size(40, 40),
+                //   fitBoundsOptions: const FitBoundsOptions(
+                //     padding: EdgeInsets.all(50),
+                //   ),
+                //   markers: controller.state.bzdListMarker,
+                //   // polygonOptions: PolygonOptions(
+                //   //     borderColor: Colors.blueAccent,
+                //   //     color: Colors.black12,
+                //   //     borderStrokeWidth: 3),
+                //   builder: (context, markers) {
+                //     return FloatingActionButton(
+                //       child: Text(markers.length.toString()),
+                //       onPressed: null,
+                //     );
+                //   },
+                // ),
               ],
             ),
             Padding(

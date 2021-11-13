@@ -50,6 +50,7 @@ class AMapController extends GetxController {
     List<Marker> _list = [];
     for (var column in bzds) {
       _list.add(Marker(
+        anchorPos: AnchorPos.align(AnchorAlign.center),
         point: LatLng(column.YZB, column.XZB),
         width: 80.0,
         height: 80.0,
