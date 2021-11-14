@@ -57,8 +57,9 @@ class KclKsProvider extends BaseDbProvider {
   Future<List<KclKsModel>> getDataByColAndVal(String column, val) async {
     Database db = await getDataBase();
     List<KclKsModel> _list = [];
-    List<Map<String, dynamic>> maps = await db
-        .rawQuery("SELECT * FROM Companies WHERE $column LIKE '%$val%'");
+    print("SELECT * FROM  $name WHERE $column LIKE '%$val%'");
+    List<Map<String, dynamic>> maps =
+        await db.rawQuery("SELECT * FROM  $name WHERE $column LIKE '%$val%'");
     if (maps.isNotEmpty) {
       for (var item in maps) {
         _list.add(KclKsModel.fromMap(item));

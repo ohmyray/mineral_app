@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '/database/provider/klc/kc_provider.dart';
+
 import 'index.dart';
 
 class ThemeSearchController extends GetxController {
@@ -59,5 +61,15 @@ class ThemeSearchController extends GetxController {
   void dispose() {
     super.dispose();
     // dispose 释放对象
+  }
+
+  void handleSearch(String value) async {
+    // if (state.isSearching == false) {
+    state.isSearching = true;
+    state.searchKclks =
+        await state.kclKsProvider.getDataByColAndVal("KSMC", "$value");
+    state.isSearching = false;
+    print('state.searchKclks${state.searchKclks}');
+    // }
   }
 }

@@ -105,10 +105,11 @@ class HeaderWidget extends GetView<ThemeSearchController> {
           CupertinoSearchTextField(
             onChanged: (value) {
               print('CupertinoSearchTextField: $value');
+              controller.handleSearch(value);
             },
           ),
           const SizedBox(height: 10),
-          Container(
+          SizedBox(
             height: 50,
             child: ListView(
               shrinkWrap: true,
@@ -134,8 +135,8 @@ class HeaderWidget extends GetView<ThemeSearchController> {
 
 Widget buildTabbarItem(item) {
   return Container(
-    padding: EdgeInsets.only(right: 15.0, left: 15),
-    margin: EdgeInsets.only(right: 5),
+    padding: const EdgeInsets.only(right: 15.0, left: 15),
+    margin: const EdgeInsets.only(right: 5),
     decoration: BoxDecoration(
         color: item['active'] ? Colors.blueAccent : Colors.white,
         borderRadius: BorderRadius.circular(24),
