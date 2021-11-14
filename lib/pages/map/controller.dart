@@ -25,6 +25,7 @@ class AMapController extends GetxController {
     super.onInit();
     List<BzdModel> bzds = await state.bzdProvider.getAllData();
     state.bzdListMarker = buildBzdMarker(bzds);
+    // state.currentTapMarker = bzds[0];
   }
 
   @override
@@ -58,6 +59,8 @@ class AMapController extends GetxController {
             onPressed: () {
               print(column.BSM);
               print(column.KQBH);
+              state.currentTapMarker = column;
+              togglePanelStatus();
             },
             icon: const Icon(
               Icons.tour,
@@ -67,5 +70,12 @@ class AMapController extends GetxController {
       ));
     }
     return _list;
+  }
+
+  void togglePanelStatus() {
+    print('[togglePanelStatus]${state.panelController.isPanelOpen}');
+    if (state.panelController.isPanelOpen == false) {
+      state.panelController.open();
+    }
   }
 }

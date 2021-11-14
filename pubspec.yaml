@@ -36,7 +36,10 @@ dependencies:
   # carousel_slider: 4.0.0
 
   flutter_map: 0.14.0
+  flutter_map_marker_cluster: ^0.4.3
   latlong2: 0.8.1
+
+  sliding_up_panel: ^2.0.0+1
 
   # 加密安全 SHA
   crypto: ^3.0.1
