@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+
+import '/pages/theme_search/widgets/widgets.dart';
 
 import '/database/provider/klc/kc_provider.dart';
 
@@ -28,10 +31,12 @@ class ThemeSearchController extends GetxController {
   ///在 widget 内存中分配后立即调用。
   ///你可以用它来为控制器初始化 initialize 一些东西。
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
     // new 对象
     // 初始静态数据
+    state.searchKclks =
+        await state.kclKsProvider.getDataByColAndVal("KSMC", "");
   }
 
   ///在 onInit() 之后调用 1 帧。这是进入的理想场所
@@ -64,12 +69,25 @@ class ThemeSearchController extends GetxController {
   }
 
   void handleSearch(String value) async {
-    // if (state.isSearching == false) {
-    state.isSearching = true;
-    state.searchKclks =
-        await state.kclKsProvider.getDataByColAndVal("KSMC", "$value");
-    state.isSearching = false;
-    print('state.searchKclks${state.searchKclks}');
+    if (state.isSearching == false) {
+      print('controller.state.searchKclks,${state.searchKclks}');
+      state.isSearching = true;
+      state.searchKclks =
+          await state.kclKsProvider.getDataByColAndVal("KSMC", "$value");
+      state.isSearching = false;
+      print('state.searchKclks${state.searchKclks}');
+    }
+  }
+
+  handleUpdateActiveType(item) {
+    item.active = true;
+    // for (var i = 0; i < state.itemList.length; i++) {
+    //   var target = state.itemList[i];
+    //   if (item.label == target.label) {
+    //     target.active = true;
+    //   } else {
+    //     target.active = false;
+    //   }
     // }
   }
 }

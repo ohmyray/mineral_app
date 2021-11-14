@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mineral_app/database/model/kcl/ks.dart';
 
 import '../index.dart';
 import 'container.dart';
@@ -10,119 +11,74 @@ class HeaderWidget extends GetView<ThemeSearchController> {
   final itemList = [
     {
       'label': '矿区名称',
-      'icon': CupertinoIcons.book,
-      'active': true,
+      'column': 'KSMC',
     },
     {
       'label': '矿种',
-      'icon': CupertinoIcons.book,
-      'active': false,
+      'column': 'DJFLBH',
     },
-    {
-      'label': '利用',
-      'icon': CupertinoIcons.book,
-      'active': false,
-    },
-    {
-      'label': '储量规模',
-      'icon': CupertinoIcons.book,
-      'active': false,
-    },
-    {
-      'label': '行政区划',
-      'icon': CupertinoIcons.book,
-      'active': false,
-    },
+    // {
+    //   'label': '利用',
+    //   'column': 'JJLX',
+    // },
+    // {
+    //   'label': '储量规模',
+    //   'column': 'JJLX',
+    // },
+    // {
+    //   'label': '行政区划',
+    // }
   ];
-
-  final itemLista = [
-    {
-      'name': '广州测试矿区1',
-      'code': 'sg000003',
-      'num': 'sg000003',
-      'state': '1',
-      'status': '2',
-      'user': '@me',
-    },
-    {
-      'name': '广州测试矿区1',
-      'code': 'sg000003',
-      'num': 'sg000003',
-      'state': '1',
-      'status': '2',
-      'user': '@me',
-    },
-    {
-      'name': '广州测试矿区1',
-      'code': 'sg000003',
-      'num': 'sg0000031',
-      'state': '1',
-      'status': '2',
-      'user': '@me',
-    },
-    {
-      'name': '广州测试矿区1',
-      'code': 'sg000003',
-      'num': 'sg000003',
-      'state': '1',
-      'status': '2',
-      'user': '@me',
-    },
-    {
-      'name': '广州测试矿区1',
-      'code': 'sg000003',
-      'num': 'sg000003',
-      'state': '1',
-      'status': '2',
-      'user': '@me',
-    },
-    {
-      'name': '广州测试矿区1',
-      'code': 'sg000003',
-      'num': 'sg000003',
-      'state': '1',
-      'status': '2',
-      'user': '@me',
-    },
-    {
-      'name': '广州测试矿区1',
-      'code': 'sg000003',
-      'num': 'sg000003',
-      'state': '1',
-      'status': '2',
-      'user': '@me',
-    },
-  ];
-
   // 内容页
   Widget _buildView() {
     return SafeArea(
-        child: Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CupertinoSearchTextField(
-            onChanged: (value) {
-              print('CupertinoSearchTextField: $value');
-              controller.handleSearch(value);
-            },
-          ),
-          const SizedBox(height: 10),
-          SizedBox(
-            height: 50,
-            child: ListView(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              children: itemList.map((item) => buildTabbarItem(item)).toList(),
-            ),
-          ),
-          Expanded(
-              child: ListView(
-                  children: itemLista.map((item) => infoCard(item)).toList())),
-        ],
-      ),
-    ));
+        child: Obx(() => Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CupertinoSearchTextField(
+                    onChanged: (value) {
+                      print('CupertinoSearchTextField: $value');
+                      controller.handleSearch(value);
+                    },
+                  ),
+                  const SizedBox(height: 10),
+                  SizedBox(
+                    height: 30,
+                    child: ListView(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      children: itemList
+                          .map((item) => GestureDetector(
+                                child: buildTabbarItem(
+                                    item, controller.state.tabbarActive),
+                                onTap: () {
+                                  controller.state.tabbarActive =
+                                      item['column'];
+                                },
+                              ))
+                          .toList(),
+                    ),
+                  ),
+                  Expanded(
+                      child: ListView(
+                    children:
+                        (controller.state.searchKclks as List<KclKsModel>) ==
+                                null
+                            ? [
+                                Container(
+                                  child: Text('null'),
+                                )
+                              ]
+                            : controller.state.searchKclks
+                                .map<Widget>((item) =>
+                                    GestureDetector(child: infoCard(item)))
+                                .toList(),
+                  )),
+                ],
+              ),
+            )));
   }
 
   @override
@@ -133,12 +89,12 @@ class HeaderWidget extends GetView<ThemeSearchController> {
   }
 }
 
-Widget buildTabbarItem(item) {
+Widget buildTabbarItem(item, active) {
   return Container(
     padding: const EdgeInsets.only(right: 15.0, left: 15),
     margin: const EdgeInsets.only(right: 5),
     decoration: BoxDecoration(
-        color: item['active'] ? Colors.blueAccent : Colors.white,
+        color: active == item['column'] ? Colors.blueAccent : Colors.white,
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
@@ -149,15 +105,11 @@ Widget buildTabbarItem(item) {
         ]),
     child: Row(
       children: [
-        Icon(
-          item['icon'],
-          color: item['active'] ? Colors.white : Colors.black,
-        ),
         const SizedBox(width: 7),
         Text(
           item['label'],
           style: TextStyle(
-            color: item['active'] ? Colors.white : Colors.black,
+            color: active == item['column'] ? Colors.white : Colors.black,
           ),
         ),
       ],
