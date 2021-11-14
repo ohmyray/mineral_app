@@ -79,7 +79,7 @@ class AMapPage extends GetView<AMapController> {
                   // ),
                 ],
               ),
-              buildSearchBar(),
+              // buildSearchBar(),
             ],
           ),
         ),
