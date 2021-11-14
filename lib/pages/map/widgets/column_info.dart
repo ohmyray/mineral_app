@@ -34,3 +34,12 @@ Widget buildViewInfo(kqbh) {
     ],
   );
 }
+
+Widget buildTitle(String title) {
+  return Center(
+    child: Text(
+      title,
+      style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+    ),
+  );
+}

@@ -6,9 +6,6 @@ import 'package:get/get.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '/database/model/kcl/ks.dart';
-import '/common/widgets/widgets.dart';
-
-import '/database/model/bzd.dart';
 
 import 'index.dart';
 import 'widgets/column_info.dart';
@@ -168,15 +165,6 @@ class PanelWidget extends StatelessWidget {
         ),
         onTap: aMapController.togglePanelStatus,
       );
-
-  Widget buildTitle(String title) {
-    return Center(
-      child: Text(
-        title,
-        style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
-      ),
-    );
-  }
 
   Widget buildAboutText(kqbh, ksbh, sczt, jjlx, ksmc, kyqr) => Container(
         padding: const EdgeInsets.symmetric(horizontal: 24),
