@@ -47,6 +47,7 @@ class ApplicationPage extends GetView<ApplicationController> {
         GestureDetector(
           onTap: () {
             print('专题查询');
+            controller.toNamed(AppRoutes.Theme_Search);
           },
           child: cardWidget('专题查询', 100, 100),
         ),
