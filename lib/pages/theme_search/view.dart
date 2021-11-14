@@ -9,7 +9,7 @@ class ThemeSearchPage extends GetView<ThemeSearchController> {
 
   // 内容页
   Widget _buildView() {
-    return HelloWidget();
+    return HeaderWidget();
   }
 
   @override
