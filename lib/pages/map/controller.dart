@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_map/plugin_api.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:mineral_app/database/model/bzd.dart';
+import 'package:mineral_app/database/model/kcl/ks.dart';
 import '/common/routes/routes.dart';
 import '/common/utils/utils.dart';
 import '/common/values/values.dart';
@@ -56,10 +57,13 @@ class AMapController extends GetxController {
         width: 80.0,
         height: 80.0,
         builder: (ctx) => IconButton(
-            onPressed: () {
+            onPressed: () async {
               print(column.BSM);
               print(column.KQBH);
-              state.currentTapMarker = column;
+
+              KclKsModel kclKs =
+                  await state.kclKsProvider.getById("'${column.KQBH}'");
+              state.currentTapMarker = kclKs;
               togglePanelStatus();
             },
             icon: const Icon(

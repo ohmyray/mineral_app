@@ -1,9 +1,12 @@
 import 'package:flutter_map/plugin_api.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:mineral_app/database/model/bzd.dart';
+import 'package:mineral_app/database/model/kcl/ks.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+import '/database/model/bzd.dart';
+
+import '/database/provider/klc/kc_provider.dart';
 import '/database/provider/bzd_provider.dart';
 
 class AMapState {
@@ -11,8 +14,9 @@ class AMapState {
   final _page = 0.obs;
   final _point = LatLng(51.5, -0.09).obs;
   BzdDbProvider bzdProvider = BzdDbProvider();
+  KclKsProvider kclKsProvider = KclKsProvider();
   MapController _mapController;
-  var _currentTapMarker = Rx<BzdModel>(null);
+  var _currentTapMarker = Rx<KclKsModel>(null);
   RxList _bzdListMarker = [].obs;
   PanelController panelController = PanelController();
   final RxDouble _offsetDistance = 0.0.obs;

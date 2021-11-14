@@ -3,12 +3,15 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:get/get.dart';
-import 'package:mineral_app/common/widgets/widgets.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+
+import '/database/model/kcl/ks.dart';
+import '/common/widgets/widgets.dart';
 
 import '/database/model/bzd.dart';
 
 import 'index.dart';
+import 'widgets/column_info.dart';
 
 class AMapPage extends GetView<AMapController> {
   @override
@@ -84,7 +87,7 @@ class AMapPage extends GetView<AMapController> {
           ),
         ),
         panelBuilder: (panelBuilderController) =>
-            Obx(() => controller.state.currentTapMarker is BzdModel
+            Obx(() => controller.state.currentTapMarker is KclKsModel
                 ? PanelWidget(
                     controller: panelBuilderController,
                     aMapController: controller,
@@ -138,15 +141,17 @@ class PanelWidget extends StatelessWidget {
           const SizedBox(height: 12),
           builDragHandle(),
           const SizedBox(height: 12),
-          buildTitle(aMapController.state.currentTapMarker is BzdModel
-              ? (aMapController.state.currentTapMarker as BzdModel).BZDMC
+          buildTitle(aMapController.state.currentTapMarker is KclKsModel
+              ? (aMapController.state.currentTapMarker as KclKsModel).KSMC
               : '未查询到数据'),
           const SizedBox(height: 12),
           buildAboutText(
-            (aMapController.state.currentTapMarker as BzdModel).XZB,
-            (aMapController.state.currentTapMarker as BzdModel).YZB,
-            (aMapController.state.currentTapMarker as BzdModel).MS,
-            (aMapController.state.currentTapMarker as BzdModel).KQBH,
+            (aMapController.state.currentTapMarker as KclKsModel).KQBH,
+            (aMapController.state.currentTapMarker as KclKsModel).KSBH,
+            (aMapController.state.currentTapMarker as KclKsModel).SCZT,
+            (aMapController.state.currentTapMarker as KclKsModel).JJLX,
+            (aMapController.state.currentTapMarker as KclKsModel).KSMC,
+            (aMapController.state.currentTapMarker as KclKsModel).KYQR,
           )
         ],
       );
@@ -161,16 +166,8 @@ class PanelWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12)),
           ),
         ),
-        onTap: togglePanel,
+        onTap: aMapController.togglePanelStatus,
       );
-
-  void togglePanel() {
-    print(
-        'aMapController.state.panelController.isPanelOpen: ${aMapController.state.panelController.isPanelOpen}');
-    aMapController.state.panelController.isPanelOpen
-        ? aMapController.state.panelController.close()
-        : aMapController.state.panelController.open();
-  }
 
   Widget buildTitle(String title) {
     return Center(
@@ -181,44 +178,23 @@ class PanelWidget extends StatelessWidget {
     );
   }
 
-  Widget buildAboutText(x, y, ms, kqbh) => Container(
+  Widget buildAboutText(kqbh, ksbh, sczt, jjlx, ksmc, kyqr) => Container(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "矿区坐标:",
-              style: TextStyle(fontWeight: FontWeight.w600),
-            ),
-            const SizedBox(height: 12),
-            Text('''
-              X:$x     Y:$y
-            '''),
-            const Text(
-              "矿区描述:",
-              style: TextStyle(fontWeight: FontWeight.w600),
-            ),
-            const SizedBox(height: 12),
-            Text('''
-              $ms
-            '''),
-            const Text(
-              "矿区详情:",
-              style: TextStyle(fontWeight: FontWeight.w600),
-            ),
+            buildColInfo('矿区编号', kqbh),
+            buildColInfo('矿山编号', ksbh),
+            buildColInfo('生产状态', sczt),
+            buildColInfo('经济类型', jjlx),
+            buildColInfo('矿区描述', ksmc),
+            buildColInfo('经济类型', kyqr),
             GestureDetector(
-              child: Text(
-                '''
-                查看 $kqbh 矿区详情
-                ''',
-                style: const TextStyle(
-                  color: Colors.blueAccent,
-                ),
-              ),
+              child: buildViewInfo(kqbh),
               onTap: () {
                 print('$kqbh详情==>>>');
               },
-            ),
+            )
           ],
         ),
       );
