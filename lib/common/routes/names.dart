@@ -6,4 +6,5 @@ class AppRoutes {
 
   static const Application = '/application';
   static const Map = '/map';
+  static const Mineral_Info = '/mineral_info';
 }

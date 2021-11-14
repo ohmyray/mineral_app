@@ -5,6 +5,7 @@ import '/pages/map/index.dart';
 import '/pages/application/index.dart';
 import '/pages/frame/sign_up/index.dart';
 import '/pages/frame/sign_in/index.dart';
+import '/pages/mineral_info/index.dart';
 
 import '/common/middlewares/middlewares.dart';
 
@@ -40,6 +41,14 @@ class AppPages {
       name: AppRoutes.Map,
       page: () => AMapPage(),
       binding: AMapBinding(),
+      // middlewares: [
+      //   RouteAuthMiddleware(priority: 1),
+      // ],
+    ),
+    GetPage(
+      name: AppRoutes.Mineral_Info,
+      page: () => MineralInfoPage(),
+      binding: MineralInfoBinding(),
       // middlewares: [
       //   RouteAuthMiddleware(priority: 1),
       // ],
