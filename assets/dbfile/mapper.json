@@ -3,6 +3,7 @@
         "table": "XZQ",
         "zh": "行政区属性",
         "columns": {
+            "zh": "行政区属性",
             "BSM": "标识码",
             "YSDM": "要素代码",
             "XZQDM": "行政区代码",
@@ -15,6 +16,7 @@
         "table": "KQZXD",
         "zh": "矿区属性结构描述",
         "columns": {
+            "zh": "矿区属性结构描述",
             "BSM": "标识码",
             "YSDM": "要素代码",
             "XZQDM": "行政区代码",
@@ -32,6 +34,7 @@
         "table": "CLJSFW",
         "zh": "矿区储量估算范围",
         "columns": {
+            "zh": "矿区储量估算范围",
             "BSM": "标识码",
             "YSDM": "要素代码",
             "XZQDM": "行政区代码",
@@ -48,8 +51,8 @@
     {
         "table": "BZD",
         "zh": "标志点",
-        "index": 4,
         "columns": {
+            "zh": "标志点",
             "BSM": "标识码",
             "YSDM": "要素代码",
             "XZQDM": "行政区代码",
@@ -64,8 +67,8 @@
     {
         "table": "TKQ",
         "zh": "探矿权",
-        "index": 5,
         "columns": {
+            "zh": "探矿权",
             "BSM": "标识码",
             "YSDM": "要素代码",
             "XKZH": "许可证号",
@@ -83,8 +86,8 @@
     {
         "table": "CKQ",
         "zh": "采矿权",
-        "index": 6,
         "columns": {
+            "zh": "采矿权",
             "BSM": "标识码",
             "YSDM": "要素代码",
             "XKZH": "许可证号",
@@ -102,8 +105,8 @@
     {
         "table": "CLGST",
         "zh": "矿区图件",
-        "index": 7,
         "columns": {
+            "zh": "矿区图件",
             "BSM": "标识码",
             "YSDM": "要素代码",
             "XZQDM": "行政区代码",

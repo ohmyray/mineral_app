@@ -66,30 +66,70 @@ class MineralInfoController extends GetxController {
 
   void getTableDates(type, jsonData) async {
     var data = Get.parameters;
+    state.xzqDataWidget.add({"key": 'zh', "value": jsonData['zh']});
     switch (type) {
       case 'XZQ':
-        state.xzqDataWidget.clear();
+        // state.xzqDataWidget.clear();
         var xzqModel = await state.xzqDbProvider.getRowByKqbh(data['select']);
-        state.xzqData = xzqModel;
+        // state.xzqData = xzqModel;
         xzqModel.toMap().forEach((key, value) {
           state.xzqDataWidget.add({"key": jsonData[key], "value": value});
         });
-        print(state.xzqDataWidget);
         break;
       case 'KQZXD':
+        // state.kqzxdDataWidget.clear();
+        var kqzxdModel =
+            await state.kqzxdDbProvider.getColByVal('KQBH', data['select']);
+        // state.kqzxdData = kqzxdModel;
+        kqzxdModel.toMap().forEach((key, value) {
+          state.xzqDataWidget.add({"key": jsonData[key], "value": value});
+        });
+
         break;
       case 'CLJSFW':
+        var kqzxdModel =
+            await state.cljsfwDbProvider.getColByVal('KQBH', data['select']);
+        // state.kqzxdData = kqzxdModel;
+        kqzxdModel.toMap().forEach((key, value) {
+          state.xzqDataWidget.add({"key": jsonData[key], "value": value});
+        });
         break;
       case 'BZD':
+        var kqzxdModel =
+            await state.bzdfwDbProvider.getColByVal('KQBH', data['select']);
+        // state.kqzxdData = kqzxdModel;
+        kqzxdModel.toMap().forEach((key, value) {
+          state.xzqDataWidget.add({"key": jsonData[key], "value": value});
+        });
         break;
       case 'TKQ':
+        var kqzxdModel =
+            await state.tkqDbProvider.getColByVal('KQBH', data['select']);
+        // state.kqzxdData = kqzxdModel;
+        kqzxdModel.toMap().forEach((key, value) {
+          state.xzqDataWidget.add({"key": jsonData[key], "value": value});
+        });
         break;
       case 'CKQ':
+        var kqzxdModel =
+            await state.ckqDbProvider.getColByVal('KQBH', data['select']);
+        // state.kqzxdData = kqzxdModel;
+        kqzxdModel.toMap().forEach((key, value) {
+          state.xzqDataWidget.add({"key": jsonData[key], "value": value});
+        });
         break;
       case 'CLGST':
+        var kqzxdModel =
+            await state.clgstDbProvider.getColByVal('KQBH', data['select']);
+        // state.kqzxdData = kqzxdModel;
+        kqzxdModel.toMap().forEach((key, value) {
+          state.xzqDataWidget.add({"key": jsonData[key], "value": value});
+        });
         break;
       default:
     }
+
+    print(' state.kqzxdDataWidget${state.xzqDataWidget}');
     update();
   }
 }

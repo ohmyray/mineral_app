@@ -52,4 +52,15 @@ class CkqDbProvider extends BaseDbProvider {
     }
     return null;
   }
+
+  ///获取事件数据
+  Future<CkqModel> getColByVal(String col, val) async {
+    Database db = await getDataBase();
+    List<Map<String, dynamic>> maps =
+        await db.rawQuery("select * from $name where $col = '$val'");
+    if (maps.isNotEmpty) {
+      return CkqModel.fromMap(maps[0]);
+    }
+    return null;
+  }
 }
