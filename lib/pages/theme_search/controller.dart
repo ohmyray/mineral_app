@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:mineral_app/database/model/kcl/cxh.dart';
+import 'package:mineral_app/database/model/kcl/dztj.dart';
+import 'package:mineral_app/database/model/kqzxd.dart';
+import 'package:mineral_app/database/model/tkq.dart';
 
 import '/pages/theme_search/widgets/widgets.dart';
 
@@ -35,8 +39,16 @@ class ThemeSearchController extends GetxController {
     super.onInit();
     // new 对象
     // 初始静态数据
-    state.searchKclks = await state.kqzxdDbProvider
+    state.searchKclks.clear();
+    List<KqzxdModel> _list = await state.kqzxdDbProvider
         .getDataByColAndVal('${state.tabbarActive}', "");
+    if (_list.isNotEmpty) {
+      for (var node in _list) {
+        state.searchKclks
+            .add(ItemCard(title: node.KQMC, nd: node.ND, ms: node.MS));
+      }
+      update();
+    }
   }
 
   ///在 onInit() 之后调用 1 帧。这是进入的理想场所
@@ -69,6 +81,7 @@ class ThemeSearchController extends GetxController {
   }
 
   void handleSearch(String value) async {
+    state.searchKclks.clear();
     if (state.isSearching == false) {
       print('controller.state.searchKclks,${state.searchKclks}');
       state.isSearching = true;
@@ -76,20 +89,47 @@ class ThemeSearchController extends GetxController {
       //     await state.kclKsProvider.getDataByColAndVal("KSMC", "$value");
       switch (state.tabbarActive) {
         case "KQMC": // 矿区名称
-          state.searchKclks = await state.kqzxdDbProvider
+          // state.searchKclks
+
+          List<KqzxdModel> _list = await state.kqzxdDbProvider
               .getDataByColAndVal('${state.tabbarActive}', "$value");
+          if (_list.isNotEmpty) {
+            for (var node in _list) {
+              state.searchKclks
+                  .add(ItemCard(title: node.KQMC, nd: node.ND, ms: node.MS));
+            }
+          }
           break;
         case "KSMC": // 矿种查询
-          state.searchKclks = await state.tkqDbProvider
+          List<TkqModel> _list = await state.tkqDbProvider
               .getDataByColAndVal('${state.tabbarActive}', "$value");
+          if (_list.isNotEmpty) {
+            for (var node in _list) {
+              state.searchKclks
+                  .add(ItemCard(title: node.KSMC, nd: node.ND, ms: node.KCDM));
+            }
+          }
+
           break;
         case "KCL_CXH": // 利用
-          state.searchKclks = await state.kclCxhDbProvider
-              .getDataByColAndVal('${state.tabbarActive}', "$value");
+          List<KclCxhModel> _list =
+              await state.kclCxhDbProvider.getDataByColAndVal('KCFS', "$value");
+          if (_list.isNotEmpty) {
+            for (var node in _list) {
+              state.searchKclks
+                  .add(ItemCard(title: node.KCFS, nd: node.ND, ms: node.CKCB));
+            }
+          }
           break;
         case "KCL_DZTJ": // 储量规模
-          state.searchKclks = await state.kclDztjDbProvider
-              .getDataByColAndVal('${state.tabbarActive}', "$value");
+          List<KclDztjModel> _list = await state.kclDztjDbProvider
+              .getDataByColAndVal('ZYCLGM', "$value");
+          if (_list.isNotEmpty) {
+            for (var node in _list) {
+              state.searchKclks.add(
+                  ItemCard(title: node.ZYCLGM, nd: node.ND, ms: node.ZKTMC));
+            }
+          }
           break;
         case "BZD": // 行政区划
 
@@ -97,6 +137,7 @@ class ThemeSearchController extends GetxController {
         default:
       }
       state.isSearching = false;
+      update();
       print('state.searchKclks${state.searchKclks}');
     }
   }
@@ -111,5 +152,6 @@ class ThemeSearchController extends GetxController {
     //     target.active = false;
     //   }
     // }
+    update();
   }
 }

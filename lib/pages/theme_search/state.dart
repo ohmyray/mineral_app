@@ -23,11 +23,12 @@ class ThemeSearchState {
   set tabbarActive(value) => _tabbarActive.value = value;
   get tabbarActive => _tabbarActive.value;
 
-  final _searchKclks = RxList<dynamic>([]);
+  var searchKclks = [];
+  // final _searchKclks = RxList<dynamic>([]);
   final Rx<bool> _isSearching = Rx<bool>(false);
 
-  set searchKclks(value) => _searchKclks.value = value;
-  get searchKclks => _searchKclks.value;
+  // set searchKclks(value) => _searchKclks.value = value;
+  // get searchKclks => _searchKclks.value;
   set isSearching(value) => _isSearching.value = value;
   get isSearching => _isSearching.value;
 

@@ -39,6 +39,7 @@ class HeaderWidget extends GetView<ThemeSearchController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CupertinoSearchTextField(
+                    // 搜索框
                     onChanged: (value) {
                       print('CupertinoSearchTextField: $value');
                       controller.handleSearch(value);
@@ -52,6 +53,7 @@ class HeaderWidget extends GetView<ThemeSearchController> {
                   SizedBox(
                     height: 30,
                     child: ListView(
+                      // 分类按钮
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       children: itemList
@@ -67,20 +69,21 @@ class HeaderWidget extends GetView<ThemeSearchController> {
                     ),
                   ),
                   Expanded(
-                      child: ListView(
-                    children: controller.state.searchKclks == null
-                        ? [
-                            Container(
-                              child: Text('null'),
-                            )
-                          ]
-                        : controller.state.searchKclks
-                            .map<Widget>((item) => GestureDetector(
-                                child: infoCard(item),
-                                onTap: () {
-                                  print('infoCard===>$item');
-                                }))
-                            .toList(),
+                      // 搜索结果展示
+                      child: GetBuilder<ThemeSearchController>(
+                    builder: (_) => ListView.builder(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      itemCount: _.state.searchKclks.length,
+                      itemExtent: 50.0,
+                      itemBuilder: (BuildContext context, int index) {
+                        print(
+                            'controller.state.searchKclks.length${_.state.searchKclks.length}');
+                        return ListTile(
+                          title: Text(
+                              "${(_.state.searchKclks[index] as ItemCard).ms} $index"),
+                        );
+                      },
+                    ),
                   )),
                 ],
               ),
