@@ -52,4 +52,26 @@ class XzqDbProvider extends BaseDbProvider {
     }
     return null;
   }
+
+  ///获取事件数据
+  Future<XzqModel> getRowByVal(String row, val) async {
+    Database db = await getDataBase();
+    List<Map<String, dynamic>> maps =
+        await db.rawQuery("select * from $name where $row = $val");
+    if (maps.isNotEmpty) {
+      return XzqModel.fromMap(maps[0]);
+    }
+    return null;
+  }
+
+  ///获取事件数据
+  Future<XzqModel> getRowByKqbh(String val) async {
+    Database db = await getDataBase();
+    List<Map<String, dynamic>> maps = await db.rawQuery(
+        "SELECT * FROM XZQ WHERE XZQDM IN (SELECT XZQDM FROM BZD WHERE KQBH = '$val')");
+    if (maps.isNotEmpty) {
+      return XzqModel.fromMap(maps[0]);
+    }
+    return null;
+  }
 }

@@ -9,7 +9,10 @@ class MineralInfoPage extends GetView<MineralInfoController> {
 
   // 内容页
   Widget _buildView() {
-    return HelloWidget();
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 10.0),
+      child: HelloWidget(),
+    );
   }
 
   @override

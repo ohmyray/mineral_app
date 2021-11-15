@@ -1,6 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mineral_app/database/model/xzq.dart';
 
 import 'index.dart';
+import 'widgets/build_table.dart';
 
 class MineralInfoController extends GetxController {
   MineralInfoController();
@@ -59,5 +62,34 @@ class MineralInfoController extends GetxController {
   void dispose() {
     super.dispose();
     // dispose 释放对象
+  }
+
+  void getTableDates(type, jsonData) async {
+    var data = Get.parameters;
+    switch (type) {
+      case 'XZQ':
+        state.xzqDataWidget.clear();
+        var xzqModel = await state.xzqDbProvider.getRowByKqbh(data['select']);
+        state.xzqData = xzqModel;
+        xzqModel.toMap().forEach((key, value) {
+          state.xzqDataWidget.add({"key": jsonData[key], "value": value});
+        });
+        print(state.xzqDataWidget);
+        break;
+      case 'KQZXD':
+        break;
+      case 'CLJSFW':
+        break;
+      case 'BZD':
+        break;
+      case 'TKQ':
+        break;
+      case 'CKQ':
+        break;
+      case 'CLGST':
+        break;
+      default:
+    }
+    update();
   }
 }
