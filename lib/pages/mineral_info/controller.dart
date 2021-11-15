@@ -66,7 +66,7 @@ class MineralInfoController extends GetxController {
 
   void getTableDates(type, jsonData) async {
     var data = Get.parameters;
-    state.xzqDataWidget.add({"key": 'zh', "value": jsonData['zh']});
+    // state.xzqDataWidget.add({"key": 'zh', "value": jsonData['zh']});
     switch (type) {
       case 'XZQ':
         // state.xzqDataWidget.clear();

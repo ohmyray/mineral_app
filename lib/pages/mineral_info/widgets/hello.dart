@@ -45,24 +45,16 @@ class HelloWidget extends GetView<MineralInfoController> {
                     // Map data = new Map<String, String>.from(mydata[index]["columns"]);
                     // Map table = new Map<String, String>.from(mydata[index]["table"]);
                     // data.forEach((item, index) => {print('$item $index')});
-                    var _xzqDatalistWidget = controller.state.xzqDataWidget
+                    var _listWidget = controller.state.xzqDataWidget
                         .asMap()
                         .keys
                         .map((index) {
+                      print('object${controller.state.xzqDataWidget[index]}');
                       return buildTableView(
                           controller.state.xzqDataWidget[index]['key'],
                           controller.state.xzqDataWidget[index]['value']);
                     }).toList();
-
-                    var _kqzxdDatalistWidget = controller.state.kqzxdDataWidget
-                        .asMap()
-                        .keys
-                        .map((index) {
-                      return buildTableView(
-                          controller.state.kqzxdDataWidget[index]['key'],
-                          controller.state.kqzxdDataWidget[index]['value']);
-                    }).toList();
-                    print('object$_kqzxdDatalistWidget');
+                    print('object$_listWidget');
                     return Card(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -75,7 +67,7 @@ class HelloWidget extends GetView<MineralInfoController> {
                           ), // 标题
                           buildColum(mydata[index]["table"],
                               mydata[index]['columns'], controller),
-                          ..._xzqDatalistWidget,
+                          ..._listWidget
                         ],
                         // children: controller.state.xzqDataWidget,
                       ),
