@@ -1,15 +1,9 @@
-import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import '/database/provider/bzd_provider.dart';
 import '/database/provider/klc/cxh_provider.dart';
 import '/database/provider/klc/dztj_provider.dart';
 import '/database/provider/kqzxd_provider.dart';
 import '/database/provider/tkq_provider.dart';
-import '/pages/theme_search/widgets/widgets.dart';
-
-import '/database/model/kcl/ks.dart';
 import '/database/provider/klc/kc_provider.dart';
 
 class ThemeSearchState {
@@ -41,4 +35,5 @@ class ThemeSearchState {
   TkqDbProvider tkqDbProvider = TkqDbProvider(); //矿种类型
   KclCxhDbProvider kclCxhDbProvider = KclCxhDbProvider(); //利用类型
   KclDztjDbProvider kclDztjDbProvider = KclDztjDbProvider(); //储量规模
+  BzdDbProvider bzdDbProvider = BzdDbProvider(); //行政区划
 }

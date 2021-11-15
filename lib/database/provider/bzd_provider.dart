@@ -67,4 +67,18 @@ class BzdDbProvider extends BaseDbProvider {
     }
     return null;
   }
+
+  Future<List<BzdModel>> getDataInCXQVal(String val) async {
+    Database db = await getDataBase();
+    List<BzdModel> _list = [];
+    List<Map<String, dynamic>> maps = await db.rawQuery(
+        "SELECT * FROM BZD WHERE XZQDM IN (SELECT XZQDM FROM XZQ WHERE XZQMC LIKE '%$val%')");
+    if (maps.isNotEmpty) {
+      for (var item in maps) {
+        _list.add(BzdModel.fromMap(item));
+      }
+      return _list;
+    }
+    return null;
+  }
 }

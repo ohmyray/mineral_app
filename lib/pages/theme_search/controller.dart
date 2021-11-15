@@ -1,13 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:mineral_app/database/model/kcl/cxh.dart';
-import 'package:mineral_app/database/model/kcl/dztj.dart';
-import 'package:mineral_app/database/model/kqzxd.dart';
-import 'package:mineral_app/database/model/tkq.dart';
+
+import '/database/model/bzd.dart';
+import '/database/model/kcl/cxh.dart';
+import '/database/model/kcl/dztj.dart';
+import '/database/model/kqzxd.dart';
+import '/database/model/tkq.dart';
 
 import '/pages/theme_search/widgets/widgets.dart';
-
-import '/database/provider/klc/kc_provider.dart';
 
 import 'index.dart';
 
@@ -133,7 +132,14 @@ class ThemeSearchController extends GetxController {
           }
           break;
         case "BZD": // 行政区划
-
+          List<BzdModel> _list =
+              await state.bzdDbProvider.getDataInCXQVal("$value");
+          if (_list.isNotEmpty) {
+            for (var node in _list) {
+              state.searchKclks.add(
+                  ItemCard(title: node.BZDMC, nd: node.ND, ms: node.XZQDM));
+            }
+          }
           break;
         default:
       }
