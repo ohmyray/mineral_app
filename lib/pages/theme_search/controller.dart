@@ -44,7 +44,7 @@ class ThemeSearchController extends GetxController {
     if (_list.isNotEmpty) {
       for (var node in _list) {
         state.searchKclks
-            .add(ItemCard(title: node.KQMC, nd: node.ND, ms: node.MS));
+            .add(ItemCard(title: node.KQMC, nd: node.KQBH, ms: node.MS));
       }
       update();
     }
