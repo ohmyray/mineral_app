@@ -1,13 +1,13 @@
 import 'dart:developer';
 
-import '/database/model/kcl/ks.dart';
+import '/database/model/kcl/cxh.dart';
 import 'package:sqflite/sqlite_api.dart';
 
 import '../../sql_provider.dart';
 
-class KclKsDbProvider extends BaseDbProvider {
+class KclCxhDbProvider extends BaseDbProvider {
   ///表名
-  final String name = 'KCL_KS';
+  final String name = 'KCL_CXH';
 
   final String columnId = "KQBH";
 
@@ -29,24 +29,24 @@ class KclKsDbProvider extends BaseDbProvider {
   }
 
   ///获取事件数据
-  Future<KclKsModel> getById(String id) async {
+  Future<KclCxhModel> getById(String id) async {
     Database db = await getDataBase();
     List<Map<String, dynamic>> maps = await _getProvider(db, id);
     // List<Map<String, dynamic>> maps = await _getBzdProvider(db, bsmId);
     if (maps.isNotEmpty) {
-      return KclKsModel.fromMap(maps[0]);
+      return KclCxhModel.fromMap(maps[0]);
     }
     return null;
   }
 
   ///获取所有数据
-  Future<List<KclKsModel>> getAllData() async {
+  Future<List<KclCxhModel>> getAllData() async {
     Database db = await getDataBase();
-    List<KclKsModel> _list = [];
+    List<KclCxhModel> _list = [];
     List<Map<String, dynamic>> maps = await db.rawQuery("select * from $name ");
     if (maps.isNotEmpty) {
       for (var item in maps) {
-        _list.add(KclKsModel.fromMap(item));
+        _list.add(KclCxhModel.fromMap(item));
       }
       return _list;
     }
@@ -54,15 +54,15 @@ class KclKsDbProvider extends BaseDbProvider {
   }
 
   /// 获取模糊搜索某列数据
-  Future<List<KclKsModel>> getDataByColAndVal(String column, val) async {
+  Future<List<KclCxhModel>> getDataByColAndVal(String column, val) async {
     Database db = await getDataBase();
-    List<KclKsModel> _list = [];
+    List<KclCxhModel> _list = [];
     print("SELECT * FROM  $name WHERE $column LIKE '%$val%'");
     List<Map<String, dynamic>> maps =
         await db.rawQuery("SELECT * FROM  $name WHERE $column LIKE '%$val%'");
     if (maps.isNotEmpty) {
       for (var item in maps) {
-        _list.add(KclKsModel.fromMap(item));
+        _list.add(KclCxhModel.fromMap(item));
       }
       return _list;
     }

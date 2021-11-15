@@ -14,7 +14,7 @@ class AMapState {
   final _page = 0.obs;
   final _point = LatLng(51.5, -0.09).obs;
   BzdDbProvider bzdProvider = BzdDbProvider();
-  KclKsProvider kclKsProvider = KclKsProvider();
+  KclKsDbProvider kclKsProvider = KclKsDbProvider();
   MapController _mapController;
   var _currentTapMarker = Rx<KclKsModel>(null);
   RxList _bzdListMarker = [].obs;

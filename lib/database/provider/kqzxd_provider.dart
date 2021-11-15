@@ -52,4 +52,17 @@ class KqzxdDbProvider extends BaseDbProvider {
     }
     return null;
   }
+
+  Future<List<KqzxdModel>> queryRows(String sql) async {
+    Database db = await getDataBase();
+    List<KqzxdModel> _list = [];
+    List<Map<String, dynamic>> maps = await db.rawQuery(sql);
+    if (maps.isNotEmpty) {
+      for (var item in maps) {
+        _list.add(KqzxdModel.fromMap(item));
+      }
+      return _list;
+    }
+    return null;
+  }
 }

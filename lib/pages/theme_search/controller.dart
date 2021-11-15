@@ -76,6 +76,22 @@ class ThemeSearchController extends GetxController {
           await state.kclKsProvider.getDataByColAndVal("KSMC", "$value");
       state.isSearching = false;
       print('state.searchKclks${state.searchKclks}');
+
+      switch (state.tabbarActive) {
+        case "KSMC": // 矿区名称
+
+          break;
+        case "DJFLBH": // 矿种查询
+
+          break;
+        case "JJLX": // 利用
+
+          break;
+        case "JJLX": // 储量规模
+
+          break;
+        default:
+      }
     }
   }
 

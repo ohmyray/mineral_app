@@ -11,23 +11,24 @@ class HeaderWidget extends GetView<ThemeSearchController> {
   final itemList = [
     {
       'label': '矿区名称',
-      'column': 'KSMC',
+      'column': 'KQZXD',
     },
     {
       'label': '矿种',
-      'column': 'DJFLBH',
+      'column': 'TKQ',
     },
-    // {
-    //   'label': '利用',
-    //   'column': 'JJLX',
-    // },
-    // {
-    //   'label': '储量规模',
-    //   'column': 'JJLX',
-    // },
-    // {
-    //   'label': '行政区划',
-    // }
+    {
+      'label': '利用',
+      'column': 'KCL_CXH',
+    },
+    {
+      'label': '储量规模',
+      'column': 'KCL_DZTJ',
+    },
+    {
+      'label': '行政区划',
+      'column': 'BZD',
+    }
   ];
   // 内容页
   Widget _buildView() {
@@ -39,6 +40,10 @@ class HeaderWidget extends GetView<ThemeSearchController> {
                 children: [
                   CupertinoSearchTextField(
                     onChanged: (value) {
+                      print('CupertinoSearchTextField: $value');
+                      controller.handleSearch(value);
+                    },
+                    onSubmitted: (value) {
                       print('CupertinoSearchTextField: $value');
                       controller.handleSearch(value);
                     },
@@ -72,8 +77,11 @@ class HeaderWidget extends GetView<ThemeSearchController> {
                                 )
                               ]
                             : controller.state.searchKclks
-                                .map<Widget>((item) =>
-                                    GestureDetector(child: infoCard(item)))
+                                .map<Widget>((item) => GestureDetector(
+                                    child: infoCard(item),
+                                    onTap: () {
+                                      print('infoCard===>$item');
+                                    }))
                                 .toList(),
                   )),
                 ],
