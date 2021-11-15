@@ -82,6 +82,7 @@ class ThemeSearchController extends GetxController {
 
   void handleSearch(String value) async {
     state.searchKclks.clear();
+    state.searchKey = value;
     if (state.isSearching == false) {
       print('controller.state.searchKclks,${state.searchKclks}');
       state.isSearching = true;

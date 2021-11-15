@@ -63,6 +63,8 @@ class HeaderWidget extends GetView<ThemeSearchController> {
                                 onTap: () {
                                   controller.state.tabbarActive =
                                       item['column'];
+                                  controller
+                                      .handleSearch(controller.state.searchKey);
                                 },
                               ))
                           .toList(),
@@ -80,7 +82,20 @@ class HeaderWidget extends GetView<ThemeSearchController> {
                             'controller.state.searchKclks.length${_.state.searchKclks.length}');
                         return ListTile(
                           title: Text(
-                              "${(_.state.searchKclks[index] as ItemCard).ms} $index"),
+                              "${(_.state.searchKclks[index] as ItemCard).title}"),
+                          subtitle: Text(
+                              "${(_.state.searchKclks[index] as ItemCard).ms}"),
+                          trailing: const Icon(Icons.keyboard_arrow_right),
+                          leading: Text(
+                            "${index + 1}",
+                            style: const TextStyle(
+                                fontSize: 24, fontWeight: FontWeight.w600),
+                          ),
+                          // selected: true,
+                          onTap: () {
+                            // do something
+                            print('onTap$index');
+                          },
                         );
                       },
                     ),

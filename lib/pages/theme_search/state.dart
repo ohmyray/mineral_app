@@ -15,6 +15,10 @@ import '/database/provider/klc/kc_provider.dart';
 class ThemeSearchState {
   // title
   final _title = "".obs;
+  final _searchKey = "".obs;
+  set searchKey(value) => _searchKey.value = value;
+  get searchKey => _title.value;
+
   set title(value) => _title.value = value;
   get title => _title.value;
 
