@@ -14,6 +14,7 @@ class MineralInfoPage extends GetView<MineralInfoController> {
 
   @override
   Widget build(BuildContext context) {
+    var data = Get.parameters;
     return Scaffold(
       body: _buildView(),
     );

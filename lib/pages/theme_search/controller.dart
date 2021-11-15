@@ -54,9 +54,20 @@ class ThemeSearchController extends GetxController {
   ///导航事件，例如 snackbar、对话框或新route，或
   ///async 异步请求。
   @override
-  void onReady() {
+  void onReady() async {
     super.onReady();
     // async 拉取数据
+    handleSearch(state.searchKey);
+    //   List<KqzxdModel> _list = await state.kqzxdDbProvider
+    //     .getDataByColAndVal('${state.tabbarActive}', "");
+    // if (_list.isNotEmpty) {
+    //   for (var node in _list) {
+    //     state.searchKclks
+    //         .add(ItemCard(title: node.KQMC, nd: node.ND, ms: node.MS));
+    //   }
+    update();
+    // }
+    // }
   }
 
   ///在 [onDelete] 方法之前调用。 [onClose] 可能用于
@@ -96,7 +107,7 @@ class ThemeSearchController extends GetxController {
           if (_list.isNotEmpty) {
             for (var node in _list) {
               state.searchKclks
-                  .add(ItemCard(title: node.KQMC, nd: node.ND, ms: node.MS));
+                  .add(ItemCard(title: node.KQMC, nd: node.KQBH, ms: node.MS));
             }
           }
           break;
@@ -105,8 +116,8 @@ class ThemeSearchController extends GetxController {
               .getDataByColAndVal('${state.tabbarActive}', "$value");
           if (_list.isNotEmpty) {
             for (var node in _list) {
-              state.searchKclks
-                  .add(ItemCard(title: node.KSMC, nd: node.ND, ms: node.KCDM));
+              state.searchKclks.add(
+                  ItemCard(title: node.KSMC, nd: node.KQBH, ms: node.KCDM));
             }
           }
 
@@ -116,8 +127,8 @@ class ThemeSearchController extends GetxController {
               await state.kclCxhDbProvider.getDataByColAndVal('KCFS', "$value");
           if (_list.isNotEmpty) {
             for (var node in _list) {
-              state.searchKclks
-                  .add(ItemCard(title: node.KCFS, nd: node.ND, ms: node.CKCB));
+              state.searchKclks.add(
+                  ItemCard(title: node.KCFS, nd: node.KQBH, ms: node.CKCB));
             }
           }
           break;
@@ -127,7 +138,7 @@ class ThemeSearchController extends GetxController {
           if (_list.isNotEmpty) {
             for (var node in _list) {
               state.searchKclks.add(
-                  ItemCard(title: node.ZYCLGM, nd: node.ND, ms: node.ZKTMC));
+                  ItemCard(title: node.ZYCLGM, nd: node.KQBH, ms: node.ZKTMC));
             }
           }
           break;
@@ -137,7 +148,7 @@ class ThemeSearchController extends GetxController {
           if (_list.isNotEmpty) {
             for (var node in _list) {
               state.searchKclks.add(
-                  ItemCard(title: node.BZDMC, nd: node.ND, ms: node.XZQDM));
+                  ItemCard(title: node.BZDMC, nd: node.KQBH, ms: node.XZQDM));
             }
           }
           break;

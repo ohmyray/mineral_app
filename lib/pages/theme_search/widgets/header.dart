@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mineral_app/common/routes/routes.dart';
 import 'package:mineral_app/database/model/kcl/ks.dart';
 
 import '../index.dart';
@@ -95,6 +96,10 @@ class HeaderWidget extends GetView<ThemeSearchController> {
                           onTap: () {
                             // do something
                             print('onTap$index');
+                            Get.toNamed(AppRoutes.Mineral_Info, parameters: {
+                              "name": _.state.tabbarActive,
+                              "select": _.state.searchKclks[index]
+                            });
                           },
                         );
                       },
