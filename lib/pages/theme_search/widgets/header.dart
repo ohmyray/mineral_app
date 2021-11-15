@@ -11,11 +11,11 @@ class HeaderWidget extends GetView<ThemeSearchController> {
   final itemList = [
     {
       'label': '矿区名称',
-      'column': 'KQZXD',
+      'column': 'KQMC',
     },
     {
       'label': '矿种',
-      'column': 'TKQ',
+      'column': 'KSMC',
     },
     {
       'label': '利用',
@@ -68,21 +68,19 @@ class HeaderWidget extends GetView<ThemeSearchController> {
                   ),
                   Expanded(
                       child: ListView(
-                    children:
-                        (controller.state.searchKclks as List<KclKsModel>) ==
-                                null
-                            ? [
-                                Container(
-                                  child: Text('null'),
-                                )
-                              ]
-                            : controller.state.searchKclks
-                                .map<Widget>((item) => GestureDetector(
-                                    child: infoCard(item),
-                                    onTap: () {
-                                      print('infoCard===>$item');
-                                    }))
-                                .toList(),
+                    children: controller.state.searchKclks == null
+                        ? [
+                            Container(
+                              child: Text('null'),
+                            )
+                          ]
+                        : controller.state.searchKclks
+                            .map<Widget>((item) => GestureDetector(
+                                child: infoCard(item),
+                                onTap: () {
+                                  print('infoCard===>$item');
+                                }))
+                            .toList(),
                   )),
                 ],
               ),

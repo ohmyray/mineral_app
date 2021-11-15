@@ -35,8 +35,8 @@ class ThemeSearchController extends GetxController {
     super.onInit();
     // new 对象
     // 初始静态数据
-    state.searchKclks =
-        await state.kclKsProvider.getDataByColAndVal("KSMC", "");
+    state.searchKclks = await state.kqzxdDbProvider
+        .getDataByColAndVal('${state.tabbarActive}', "");
   }
 
   ///在 onInit() 之后调用 1 帧。这是进入的理想场所
@@ -72,26 +72,32 @@ class ThemeSearchController extends GetxController {
     if (state.isSearching == false) {
       print('controller.state.searchKclks,${state.searchKclks}');
       state.isSearching = true;
-      state.searchKclks =
-          await state.kclKsProvider.getDataByColAndVal("KSMC", "$value");
-      state.isSearching = false;
-      print('state.searchKclks${state.searchKclks}');
-
+      // state.searchKclks =
+      //     await state.kclKsProvider.getDataByColAndVal("KSMC", "$value");
       switch (state.tabbarActive) {
-        case "KSMC": // 矿区名称
-
+        case "KQMC": // 矿区名称
+          state.searchKclks = await state.kqzxdDbProvider
+              .getDataByColAndVal('${state.tabbarActive}', "$value");
           break;
-        case "DJFLBH": // 矿种查询
-
+        case "KSMC": // 矿种查询
+          state.searchKclks = await state.tkqDbProvider
+              .getDataByColAndVal('${state.tabbarActive}', "$value");
           break;
-        case "JJLX": // 利用
-
+        case "KCL_CXH": // 利用
+          state.searchKclks = await state.kclCxhDbProvider
+              .getDataByColAndVal('${state.tabbarActive}', "$value");
           break;
-        case "JJLX": // 储量规模
+        case "KCL_DZTJ": // 储量规模
+          state.searchKclks = await state.kclDztjDbProvider
+              .getDataByColAndVal('${state.tabbarActive}', "$value");
+          break;
+        case "BZD": // 行政区划
 
           break;
         default:
       }
+      state.isSearching = false;
+      print('state.searchKclks${state.searchKclks}');
     }
   }
 

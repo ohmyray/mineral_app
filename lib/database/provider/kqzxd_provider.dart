@@ -65,4 +65,20 @@ class KqzxdDbProvider extends BaseDbProvider {
     }
     return null;
   }
+
+  /// 获取模糊搜索某列数据
+  Future<List<KqzxdModel>> getDataByColAndVal(String column, val) async {
+    Database db = await getDataBase();
+    List<KqzxdModel> _list = [];
+    print("SELECT * FROM  $name WHERE $column LIKE '%$val%'");
+    List<Map<String, dynamic>> maps =
+        await db.rawQuery("SELECT * FROM  $name WHERE $column LIKE '%$val%'");
+    if (maps.isNotEmpty) {
+      for (var item in maps) {
+        _list.add(KqzxdModel.fromMap(item));
+      }
+      return _list;
+    }
+    return null;
+  }
 }

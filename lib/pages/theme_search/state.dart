@@ -18,12 +18,12 @@ class ThemeSearchState {
   set title(value) => _title.value = value;
   get title => _title.value;
 
-  RxString _tabbarActive = 'KQZXD'.obs;
+  RxString _tabbarActive = 'KQMC'.obs;
 
   set tabbarActive(value) => _tabbarActive.value = value;
   get tabbarActive => _tabbarActive.value;
 
-  final _searchKclks = RxList<KclKsModel>([]);
+  final _searchKclks = RxList<dynamic>([]);
   final Rx<bool> _isSearching = Rx<bool>(false);
 
   set searchKclks(value) => _searchKclks.value = value;
