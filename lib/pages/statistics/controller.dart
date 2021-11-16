@@ -1,18 +1,15 @@
 import 'package:get/get.dart';
-import 'package:mineral_app/database/model/model.dart';
-import '/pages/category/provider.dart';
-import '/common/services/global.dart';
 
 import 'index.dart';
 
-class CategoryController extends GetxController with StateMixin<List<dynamic>> {
-  CategoryController();
+class StatisticsController extends GetxController {
+  StatisticsController();
 
   /// 响应式成员变量
 
+  final state = StatisticsState();
+
   /// 成员变量
-  ///
-  final kclZycl = List<KclZyclModel>.empty().obs;
 
   /// 事件
 
@@ -24,16 +21,6 @@ class CategoryController extends GetxController with StateMixin<List<dynamic>> {
     );
   }
 
-  void queryDatasource() async {
-    CategoryProvider.queryKqbh().then((value) {
-      print('change(value, status: RxStatus.success())');
-      change(value, status: RxStatus.success());
-      kclZycl.value = value;
-    }, onError: (err) {
-      change(null, status: RxStatus.error(err.toString()));
-    });
-  }
-
   /// 生命周期
 
   ///在 widget 内存中分配后立即调用。
@@ -43,7 +30,6 @@ class CategoryController extends GetxController with StateMixin<List<dynamic>> {
     super.onInit();
     // new 对象
     // 初始静态数据
-    queryDatasource();
   }
 
   ///在 onInit() 之后调用 1 帧。这是进入的理想场所

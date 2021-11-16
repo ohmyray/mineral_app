@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mineral_app/database/model/kcl/zycl.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '/common/values/values.dart';
 import '/common/services/global.dart';
@@ -12,7 +13,7 @@ class CategoryPage extends GetView<CategoryController> {
   var gobalServeice = Get.find<GlobalService>();
   @override
   Widget build(BuildContext context) {
-    final panelHeightClosed = MediaQuery.of(context).size.height * 0.7;
+    final panelHeightClosed = MediaQuery.of(context).size.height * 0.04;
     final panelHeightOpen = MediaQuery.of(context).size.height * 1;
     Size size = MediaQuery.of(context).size;
 
@@ -36,14 +37,35 @@ class CategoryPage extends GetView<CategoryController> {
           parallaxEnabled: true,
           parallaxOffset: .5,
           borderRadius: const BorderRadius.vertical(top: Radius.circular(18)),
-          body: Container(
-            padding: const EdgeInsets.only(left: 24),
-            height: size.height,
-            width: size.width,
-            decoration: const BoxDecoration(
-              color: AppColors.purple,
-            ),
-          ),
+          // body: Container(
+          //   padding: const EdgeInsets.only(left: 24),
+          //   height: size.height,
+          //   width: size.width,
+          //   decoration: const BoxDecoration(
+          //     color: AppColors.purple,
+          //   ),
+          // ),
+          body: controller.obx((state) => Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 120),
+                child: Center(
+                    child: SfCircularChart(
+                  title: ChartTitle(text: '资源储量'),
+                  legend: Legend(
+                    isVisible: true,
+                    overflowMode: LegendItemOverflowMode.wrap,
+                    position: LegendPosition.bottom,
+                  ),
+                  series: [
+                    PieSeries<KclZyclModel, String>(
+                      dataSource: controller.kclZycl,
+                      xValueMapper: (KclZyclModel data, _) => data.ZYCLLX,
+                      yValueMapper: (KclZyclModel data, _) => data.ZYCLLB,
+                      dataLabelSettings:
+                          const DataLabelSettings(isVisible: true),
+                    )
+                  ],
+                )),
+              )),
           panelBuilder: (panelBuilderController) =>
               controller.obx((state) => SingleChildScrollView(
                     physics: BouncingScrollPhysics(),
