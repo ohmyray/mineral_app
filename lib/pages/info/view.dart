@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+import '/common/values/values.dart';
 import '/common/services/global.dart';
 import '/common/widgets/build_table.dart';
 
@@ -13,13 +15,38 @@ class InfoPage extends GetView<InfoController> {
   var gobalServeice = Get.find<GlobalService>();
   @override
   Widget build(BuildContext context) {
+    final panelHeightClosed = MediaQuery.of(context).size.height * 0.7;
+    final panelHeightOpen = MediaQuery.of(context).size.height * 1;
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.purple,
+        title: const Text(
+          '矿产详情',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+        ),
         leading: GestureDetector(
-            onTap: () => Get.back(), child: const Icon(Icons.backspace)),
+            onTap: () => Get.back(),
+            child: const Icon(
+              Icons.backspace,
+              color: Colors.white,
+            )),
       ),
-      body: controller.obx((state) => SafeArea(
-            child: ListView.builder(
+      body: controller.obx((state) => SlidingUpPanel(
+            minHeight: panelHeightClosed,
+            maxHeight: panelHeightOpen,
+            parallaxEnabled: true,
+            parallaxOffset: .5,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(18)),
+            body: Container(
+              padding: const EdgeInsets.only(left: 24),
+              height: size.height,
+              width: size.width,
+              decoration: const BoxDecoration(
+                color: AppColors.purple,
+              ),
+            ),
+            panelBuilder: (panelBuilderController) => ListView.builder(
               itemCount: state.length,
               itemBuilder: (_, int index) {
                 if (state[index] is XzqModel) {
@@ -29,7 +56,8 @@ class InfoPage extends GetView<InfoController> {
                         gobalServeice.global[key] ?? key, value));
                   });
                   return ListView(
-                    shrinkWrap: true,
+                    shrinkWrap: true, //为true可以解决子控件必须设置高度的问题
+                    physics: NeverScrollableScrollPhysics(), //禁用滑动事件
                     padding: const EdgeInsets.all(20.0),
                     children: <Widget>[
                       const Text(
@@ -48,7 +76,8 @@ class InfoPage extends GetView<InfoController> {
                         gobalServeice.global[key] ?? key, value));
                   });
                   return ListView(
-                    shrinkWrap: true,
+                    shrinkWrap: true, //为true可以解决子控件必须设置高度的问题
+                    physics: NeverScrollableScrollPhysics(), //禁用滑动事件
                     padding: const EdgeInsets.all(20.0),
                     children: <Widget>[
                       const Text(
@@ -67,7 +96,8 @@ class InfoPage extends GetView<InfoController> {
                         gobalServeice.global[key] ?? key, value));
                   });
                   return ListView(
-                    shrinkWrap: true,
+                    shrinkWrap: true, //为true可以解决子控件必须设置高度的问题
+                    physics: NeverScrollableScrollPhysics(), //禁用滑动事件
                     padding: const EdgeInsets.all(20.0),
                     children: <Widget>[
                       const Text(
@@ -86,7 +116,8 @@ class InfoPage extends GetView<InfoController> {
                         gobalServeice.global[key] ?? key, value));
                   });
                   return ListView(
-                    shrinkWrap: true,
+                    shrinkWrap: true, //为true可以解决子控件必须设置高度的问题
+                    physics: NeverScrollableScrollPhysics(), //禁用滑动事件
                     padding: const EdgeInsets.all(20.0),
                     children: <Widget>[
                       const Text(
@@ -105,7 +136,8 @@ class InfoPage extends GetView<InfoController> {
                         gobalServeice.global[key] ?? key, value));
                   });
                   return ListView(
-                    shrinkWrap: true,
+                    shrinkWrap: true, //为true可以解决子控件必须设置高度的问题
+                    physics: NeverScrollableScrollPhysics(), //禁用滑动事件
                     padding: const EdgeInsets.all(20.0),
                     children: <Widget>[
                       const Text(
@@ -124,7 +156,8 @@ class InfoPage extends GetView<InfoController> {
                         gobalServeice.global[key] ?? key, value));
                   });
                   return ListView(
-                    shrinkWrap: true,
+                    shrinkWrap: true, //为true可以解决子控件必须设置高度的问题
+                    physics: NeverScrollableScrollPhysics(), //禁用滑动事件
                     padding: const EdgeInsets.all(20.0),
                     children: <Widget>[
                       const Text(
@@ -143,7 +176,8 @@ class InfoPage extends GetView<InfoController> {
                         gobalServeice.global[key] ?? key, value));
                   });
                   return ListView(
-                    shrinkWrap: true,
+                    shrinkWrap: true, //为true可以解决子控件必须设置高度的问题
+                    physics: NeverScrollableScrollPhysics(), //禁用滑动事件
                     padding: const EdgeInsets.all(20.0),
                     children: <Widget>[
                       const Text(
@@ -162,7 +196,8 @@ class InfoPage extends GetView<InfoController> {
                         gobalServeice.global[key] ?? key, value));
                   });
                   return ListView(
-                    shrinkWrap: true,
+                    shrinkWrap: true, //为true可以解决子控件必须设置高度的问题
+                    physics: NeverScrollableScrollPhysics(), //禁用滑动事件
                     padding: const EdgeInsets.all(20.0),
                     children: <Widget>[
                       const Text(
@@ -181,7 +216,8 @@ class InfoPage extends GetView<InfoController> {
                         gobalServeice.global[key] ?? key, value));
                   });
                   return ListView(
-                    shrinkWrap: true,
+                    shrinkWrap: true, //为true可以解决子控件必须设置高度的问题
+                    physics: NeverScrollableScrollPhysics(), //禁用滑动事件
                     padding: const EdgeInsets.all(20.0),
                     children: <Widget>[
                       const Text(
@@ -200,7 +236,8 @@ class InfoPage extends GetView<InfoController> {
                         gobalServeice.global[key] ?? key, value));
                   });
                   return ListView(
-                    shrinkWrap: true,
+                    shrinkWrap: true, //为true可以解决子控件必须设置高度的问题
+                    physics: NeverScrollableScrollPhysics(), //禁用滑动事件
                     padding: const EdgeInsets.all(20.0),
                     children: <Widget>[
                       const Text(
@@ -219,7 +256,8 @@ class InfoPage extends GetView<InfoController> {
                         gobalServeice.global[key] ?? key, value));
                   });
                   return ListView(
-                    shrinkWrap: true,
+                    shrinkWrap: true, //为true可以解决子控件必须设置高度的问题
+                    physics: NeverScrollableScrollPhysics(), //禁用滑动事件
                     padding: const EdgeInsets.all(20.0),
                     children: <Widget>[
                       const Text(
@@ -238,7 +276,8 @@ class InfoPage extends GetView<InfoController> {
                         gobalServeice.global[key] ?? key, value));
                   });
                   return ListView(
-                    shrinkWrap: true,
+                    shrinkWrap: true, //为true可以解决子控件必须设置高度的问题
+                    physics: NeverScrollableScrollPhysics(), //禁用滑动事件
                     padding: const EdgeInsets.all(20.0),
                     children: <Widget>[
                       const Text(
@@ -257,7 +296,8 @@ class InfoPage extends GetView<InfoController> {
                         gobalServeice.global[key] ?? key, value));
                   });
                   return ListView(
-                    shrinkWrap: true,
+                    shrinkWrap: true, //为true可以解决子控件必须设置高度的问题
+                    physics: NeverScrollableScrollPhysics(), //禁用滑动事件
                     padding: const EdgeInsets.all(20.0),
                     children: <Widget>[
                       const Text(
@@ -276,7 +316,8 @@ class InfoPage extends GetView<InfoController> {
                         gobalServeice.global[key] ?? key, value));
                   });
                   return ListView(
-                    shrinkWrap: true,
+                    shrinkWrap: true, //为true可以解决子控件必须设置高度的问题
+                    physics: NeverScrollableScrollPhysics(), //禁用滑动事件
                     padding: const EdgeInsets.all(20.0),
                     children: <Widget>[
                       const Text(
@@ -295,7 +336,8 @@ class InfoPage extends GetView<InfoController> {
                         gobalServeice.global[key] ?? key, value));
                   });
                   return ListView(
-                    shrinkWrap: true,
+                    shrinkWrap: true, //为true可以解决子控件必须设置高度的问题
+                    physics: NeverScrollableScrollPhysics(), //禁用滑动事件
                     padding: const EdgeInsets.all(20.0),
                     children: <Widget>[
                       const Text(
@@ -314,7 +356,8 @@ class InfoPage extends GetView<InfoController> {
                         gobalServeice.global[key] ?? key, value));
                   });
                   return ListView(
-                    shrinkWrap: true,
+                    shrinkWrap: true, //为true可以解决子控件必须设置高度的问题
+                    physics: NeverScrollableScrollPhysics(), //禁用滑动事件
                     padding: const EdgeInsets.all(20.0),
                     children: <Widget>[
                       const Text(
@@ -333,7 +376,8 @@ class InfoPage extends GetView<InfoController> {
                         gobalServeice.global[key] ?? key, value));
                   });
                   return ListView(
-                    shrinkWrap: true,
+                    shrinkWrap: true, //为true可以解决子控件必须设置高度的问题
+                    physics: NeverScrollableScrollPhysics(), //禁用滑动事件
                     padding: const EdgeInsets.all(20.0),
                     children: <Widget>[
                       const Text(
@@ -352,7 +396,8 @@ class InfoPage extends GetView<InfoController> {
                         gobalServeice.global[key] ?? key, value));
                   });
                   return ListView(
-                    shrinkWrap: true,
+                    shrinkWrap: true, //为true可以解决子控件必须设置高度的问题
+                    physics: NeverScrollableScrollPhysics(), //禁用滑动事件
                     padding: const EdgeInsets.all(20.0),
                     children: <Widget>[
                       const Text(
@@ -371,7 +416,8 @@ class InfoPage extends GetView<InfoController> {
                         gobalServeice.global[key] ?? key, value));
                   });
                   return ListView(
-                    shrinkWrap: true,
+                    shrinkWrap: true, //为true可以解决子控件必须设置高度的问题
+                    physics: NeverScrollableScrollPhysics(), //禁用滑动事件
                     padding: const EdgeInsets.all(20.0),
                     children: <Widget>[
                       const Text(
@@ -390,7 +436,8 @@ class InfoPage extends GetView<InfoController> {
                         gobalServeice.global[key] ?? key, value));
                   });
                   return ListView(
-                    shrinkWrap: true,
+                    shrinkWrap: true, //为true可以解决子控件必须设置高度的问题
+                    physics: NeverScrollableScrollPhysics(), //禁用滑动事件
                     padding: const EdgeInsets.all(20.0),
                     children: <Widget>[
                       const Text(
@@ -409,7 +456,8 @@ class InfoPage extends GetView<InfoController> {
                         gobalServeice.global[key] ?? key, value));
                   });
                   return ListView(
-                    shrinkWrap: true,
+                    shrinkWrap: true, //为true可以解决子控件必须设置高度的问题
+                    physics: NeverScrollableScrollPhysics(), //禁用滑动事件
                     padding: const EdgeInsets.all(20.0),
                     children: <Widget>[
                       const Text(
