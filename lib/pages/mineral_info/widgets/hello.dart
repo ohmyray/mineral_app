@@ -41,42 +41,39 @@ class HelloWidget extends GetView<MineralInfoController> {
             child: Obx(() => Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: ListView.builder(
-                  itemBuilder: (BuildContext context, int index) {
-                    // Map data = new Map<String, String>.from(mydata[index]["columns"]);
-                    // Map table = new Map<String, String>.from(mydata[index]["table"]);
-                    // data.forEach((item, index) => {print('$item $index')});
-                    var _listWidget = controller.state.xzqDataWidget
-                        .asMap()
-                        .keys
-                        .map((index) {
-                      print('object${controller.state.xzqDataWidget[index]}');
-                      return buildTableView(
-                          controller.state.xzqDataWidget[index]['key'],
-                          controller.state.xzqDataWidget[index]['value']);
-                    }).toList();
-                    print('object$_listWidget');
-                    return Card(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: <Widget>[
-                          Text(
-                            mydata[index]["zh"],
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w600),
-                          ), // 标题
-                          buildColum(mydata[index]["table"],
-                              mydata[index]['columns'], controller),
-                          ..._listWidget
-                        ],
-                        // children: controller.state.xzqDataWidget,
-                      ),
-                    );
-                  },
-                  itemCount: controller.state.configs == null
-                      ? 0
-                      : controller.state.configs.length,
-                ))));
+                    itemBuilder: (BuildContext context, int index) {
+                      // Map data = new Map<String, String>.from(mydata[index]["columns"]);
+                      // Map table = new Map<String, String>.from(mydata[index]["table"]);
+                      // data.forEach((item, index) => {print('$item $index')});
+                      var _listWidget = controller.state.xzqDataWidget
+                          .asMap()
+                          .keys
+                          .map((index) {
+                        print('object${controller.state.xzqDataWidget[index]}');
+                        return buildTableView(
+                            controller.state.xzqDataWidget[index]['key'],
+                            controller.state.xzqDataWidget[index]['value']);
+                      }).toList();
+                      print('object$_listWidget');
+                      return Card(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: <Widget>[
+                            Text(
+                              "${mydata[index]["zh"]}, ${controller.state.xzqDataWidget}",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 24, fontWeight: FontWeight.w600),
+                            ), // 标题
+                            buildColum(mydata[index]["table"],
+                                mydata[index]['columns'], controller),
+                            ..._listWidget
+                          ],
+                          // children: controller.state.xzqDataWidget,
+                        ),
+                      );
+                    },
+                    itemCount: 1))));
       },
     );
   }

@@ -3,6 +3,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:get/get.dart';
+import 'package:mineral_app/common/routes/routes.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '/database/model/kcl/ks.dart';
@@ -181,6 +182,7 @@ class PanelWidget extends StatelessWidget {
               child: buildViewInfo(kqbh),
               onTap: () {
                 print('$kqbh详情==>>>');
+                Get.toNamed(AppRoutes.MapInfo, parameters: {"selectd": kqbh});
               },
             )
           ],

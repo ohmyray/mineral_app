@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import '/pages/root/root_view.dart';
 import '/global.dart';
 import '/common/style/style.dart';
 import '/common/routes/routes.dart';

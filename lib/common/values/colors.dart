@@ -36,4 +36,6 @@ class AppColors {
 
   /// tabCellSeparator 单元格底部分隔条 颜色
   static const Color tabCellSeparator = Color.fromARGB(255, 230, 230, 231);
+
+  static const Color purple = Color(0xFF9AA0FC);
 }

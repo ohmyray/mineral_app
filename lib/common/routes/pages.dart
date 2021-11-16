@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mineral_app/pages/info/index.dart';
+import '/pages/theme_search/index.dart';
 
 import '/pages/map/index.dart';
 import '/pages/application/index.dart';
@@ -38,17 +40,28 @@ class AppPages {
       // ],
     ),
     GetPage(
-      name: AppRoutes.Map,
-      page: () => AMapPage(),
-      binding: AMapBinding(),
+      name: AppRoutes.Map, page: () => AMapPage(), binding: AMapBinding(),
       // middlewares: [
       //   RouteAuthMiddleware(priority: 1),
       // ],
     ),
     GetPage(
+      name: AppRoutes.MapInfo, // '/info'
+      page: () => InfoPage(),
+      binding: InfoBinding(),
+    ),
+    GetPage(
       name: AppRoutes.Mineral_Info,
       page: () => MineralInfoPage(),
       binding: MineralInfoBinding(),
+      // middlewares: [
+      //   RouteAuthMiddleware(priority: 1),
+      // ],
+    ),
+    GetPage(
+      name: AppRoutes.Theme_Search,
+      page: () => ThemeSearchPage(),
+      binding: ThemeSearchBinding(),
       // middlewares: [
       //   RouteAuthMiddleware(priority: 1),
       // ],
