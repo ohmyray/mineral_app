@@ -1,13 +1,13 @@
 import 'package:get/get.dart';
+import '/pages/category/provider.dart';
+import '/common/services/global.dart';
 
 import 'index.dart';
 
-class CategoryController extends GetxController {
+class CategoryController extends GetxController with StateMixin<List<dynamic>> {
   CategoryController();
 
   /// 响应式成员变量
-
-  final state = CategoryState();
 
   /// 成员变量
 
@@ -21,6 +21,15 @@ class CategoryController extends GetxController {
     );
   }
 
+  void queryDatasource() async {
+    CategoryProvider.queryKqbh().then((value) {
+      print('change(value, status: RxStatus.success())');
+      change(value, status: RxStatus.success());
+    }, onError: (err) {
+      change(null, status: RxStatus.error(err.toString()));
+    });
+  }
+
   /// 生命周期
 
   ///在 widget 内存中分配后立即调用。
@@ -30,6 +39,7 @@ class CategoryController extends GetxController {
     super.onInit();
     // new 对象
     // 初始静态数据
+    queryDatasource();
   }
 
   ///在 onInit() 之后调用 1 帧。这是进入的理想场所

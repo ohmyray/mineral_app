@@ -7,7 +7,7 @@ import '../../sql_provider.dart';
 
 class KclZyclDbProvider extends BaseDbProvider {
   ///表名
-  final String name = 'KCL_KS';
+  final String name = 'KCL_ZYCL';
 
   final String columnId = "KQBH";
 
