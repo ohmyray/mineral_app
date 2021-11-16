@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:mineral_app/database/model/xzq.dart';
 
 import 'index.dart';
-import 'widgets/build_table.dart';
+import '../../common/widgets/build_table.dart';
 
 class MineralInfoController extends GetxController {
   MineralInfoController();

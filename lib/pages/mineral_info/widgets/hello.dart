@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:convert';
 import '../index.dart';
-import 'build_table.dart';
+import '../../../common/widgets/build_table.dart';
 
 /// hello
 class HelloWidget extends GetView<MineralInfoController> {

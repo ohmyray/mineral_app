@@ -24,7 +24,7 @@ class InfoController extends GetxController with StateMixin<List<dynamic>> {
     print('infoPage:${data}');
     var gobalServeice = Get.find<GlobalService>();
     print(" Get.find<GlobalService>(),${gobalServeice.global}");
-    InfoProvider.queryBzd().then((value) {
+    InfoProvider.queryKqbh(data['selectd']).then((value) {
       print('change(value, status: RxStatus.success())');
       change(value, status: RxStatus.success());
     }, onError: (err) {

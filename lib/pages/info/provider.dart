@@ -11,9 +11,20 @@ class InfoProvider extends GetConnect {
   CkqDbProvider ckqDbProvider = CkqDbProvider();
   ClgstDbProvider clgstDbProvider = ClgstDbProvider();
 
-  static Future<List<XzqModel>> queryBzd() async {
+  static Future<List> queryKqbh(id) async {
     XzqDbProvider xzqDbProvider = XzqDbProvider();
-    var res = await xzqDbProvider.getAllData();
-    return res;
+    KqzxdDbProvider kqzxdDbProvider = KqzxdDbProvider();
+    CljsfwDbProvider cljsfwDbProvider = CljsfwDbProvider();
+    BzdDbProvider bzdfwDbProvider = BzdDbProvider();
+    TkqDbProvider tkqDbProvider = TkqDbProvider();
+    CkqDbProvider ckqDbProvider = CkqDbProvider();
+    ClgstDbProvider clgstDbProvider = ClgstDbProvider();
+
+    var _list = [];
+    var xzqModel = await xzqDbProvider.getRowByKqbh(id);
+    _list.add(xzqModel);
+    var kqzxdModel = await kqzxdDbProvider.getColByVal('KQBH', id);
+    _list.add(kqzxdModel);
+    return _list;
   }
 }
