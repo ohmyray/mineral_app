@@ -1,11 +1,11 @@
 import 'dart:developer';
 
-import '/database/model/kcl/ks.dart';
+import '/database/model/kcl/zycl.dart';
 import 'package:sqflite/sqlite_api.dart';
 
 import '../../sql_provider.dart';
 
-class KclKsDbProvider extends BaseDbProvider {
+class KclZyclDbProvider extends BaseDbProvider {
   ///表名
   final String name = 'KCL_KS';
 
@@ -29,24 +29,24 @@ class KclKsDbProvider extends BaseDbProvider {
   }
 
   ///获取事件数据
-  Future<KclKsModel> getById(String id) async {
+  Future<KclZyclModel> getById(String id) async {
     Database db = await getDataBase();
     List<Map<String, dynamic>> maps = await _getProvider(db, id);
     // List<Map<String, dynamic>> maps = await _getBzdProvider(db, bsmId);
     if (maps.isNotEmpty) {
-      return KclKsModel.fromMap(maps[0]);
+      return KclZyclModel.fromMap(maps[0]);
     }
     return null;
   }
 
   ///获取所有数据
-  Future<List<KclKsModel>> getAllData() async {
+  Future<List<KclZyclModel>> getAllData() async {
     Database db = await getDataBase();
-    List<KclKsModel> _list = [];
+    List<KclZyclModel> _list = [];
     List<Map<String, dynamic>> maps = await db.rawQuery("select * from $name ");
     if (maps.isNotEmpty) {
       for (var item in maps) {
-        _list.add(KclKsModel.fromMap(item));
+        _list.add(KclZyclModel.fromMap(item));
       }
       return _list;
     }
@@ -54,15 +54,15 @@ class KclKsDbProvider extends BaseDbProvider {
   }
 
   /// 获取模糊搜索某列数据
-  Future<List<KclKsModel>> getDataByColAndVal(String column, val) async {
+  Future<List<KclZyclModel>> getDataByColAndVal(String column, val) async {
     Database db = await getDataBase();
-    List<KclKsModel> _list = [];
+    List<KclZyclModel> _list = [];
     print("SELECT * FROM  $name WHERE $column LIKE '%$val%'");
     List<Map<String, dynamic>> maps =
         await db.rawQuery("SELECT * FROM  $name WHERE $column LIKE '%$val%'");
     if (maps.isNotEmpty) {
       for (var item in maps) {
-        _list.add(KclKsModel.fromMap(item));
+        _list.add(KclZyclModel.fromMap(item));
       }
       return _list;
     }
@@ -70,12 +70,12 @@ class KclKsDbProvider extends BaseDbProvider {
   }
 
   ///获取事件数据
-  Future<KclKsModel> getColByVal(String col, val) async {
+  Future<KclZyclModel> getColByVal(String col, val) async {
     Database db = await getDataBase();
     List<Map<String, dynamic>> maps =
         await db.rawQuery("select * from $name where $col = '$val'");
     if (maps.isNotEmpty) {
-      return KclKsModel.fromMap(maps[0]);
+      return KclZyclModel.fromMap(maps[0]);
     }
     return null;
   }

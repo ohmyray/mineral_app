@@ -11,3 +11,4 @@ export 'xzq_provider.dart';
 export 'klc/cxh_provider.dart';
 export 'klc/dztj_provider.dart';
 export 'klc/kc_provider.dart';
+export 'klc/zycl_provider.dart';
