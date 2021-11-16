@@ -1,13 +1,10 @@
 import 'package:get/get.dart';
+import 'package:mineral_app/pages/info/provider.dart';
 
 import 'index.dart';
 
-class InfoController extends GetxController {
-  InfoController();
-
+class InfoController extends GetxController with StateMixin<List<dynamic>> {
   /// 响应式成员变量
-
-  final state = InfoState();
 
   /// 成员变量
 
@@ -21,6 +18,17 @@ class InfoController extends GetxController {
     );
   }
 
+  void queryDatasource() async {
+    var data = Get.parameters;
+    print('infoPage:${data}');
+    InfoProvider.queryBzd().then((value) {
+      print('change(value, status: RxStatus.success())');
+      change(value, status: RxStatus.success());
+    }, onError: (err) {
+      change(null, status: RxStatus.error(err.toString()));
+    });
+  }
+
   /// 生命周期
 
   ///在 widget 内存中分配后立即调用。
@@ -30,6 +38,7 @@ class InfoController extends GetxController {
     super.onInit();
     // new 对象
     // 初始静态数据
+    queryDatasource();
   }
 
   ///在 onInit() 之后调用 1 帧。这是进入的理想场所

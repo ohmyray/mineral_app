@@ -7,15 +7,12 @@ import 'widgets/widgets.dart';
 class InfoPage extends GetView<InfoController> {
   const InfoPage({Key key}) : super(key: key);
 
-  // 内容页
-  Widget _buildView() {
-    return HelloWidget();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _buildView(),
+      body: controller.obx((state) => Center(
+            child: Text('$state'),
+          )),
     );
   }
 }

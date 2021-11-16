@@ -97,11 +97,15 @@ class HeaderWidget extends GetView<ThemeSearchController> {
                             // do something
                             var kqbh =
                                 (_.state.searchKclks[index] as ItemCard).nd;
-                            print('onTap$index');
-                            Get.toNamed(AppRoutes.Mineral_Info, parameters: {
-                              "name": _.state.tabbarActive,
-                              "select": kqbh
-                            });
+                            // print('onTap$index');
+                            // Get.toNamed(AppRoutes.Mineral_Info, parameters: {
+                            //   "name": _.state.tabbarActive,
+                            //   "select": kqbh
+                            // });
+
+                            print('$kqbh详情==>>>');
+                            Get.toNamed(AppRoutes.MapInfo,
+                                parameters: {"selectd": kqbh});
                           },
                         );
                       },
