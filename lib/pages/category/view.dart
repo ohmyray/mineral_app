@@ -13,7 +13,7 @@ class CategoryPage extends GetView<CategoryController> {
   var gobalServeice = Get.find<GlobalService>();
   @override
   Widget build(BuildContext context) {
-    final panelHeightClosed = MediaQuery.of(context).size.height * 0.04;
+    final panelHeightClosed = MediaQuery.of(context).size.height * 0.08;
     final panelHeightOpen = MediaQuery.of(context).size.height * 1;
     Size size = MediaQuery.of(context).size;
     var data = Get.arguments;
