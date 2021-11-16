@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
-import 'package:mineral_app/pages/info/provider.dart';
+import '/common/services/global.dart';
+import '/pages/info/provider.dart';
 
 import 'index.dart';
 
@@ -21,6 +22,8 @@ class InfoController extends GetxController with StateMixin<List<dynamic>> {
   void queryDatasource() async {
     var data = Get.parameters;
     print('infoPage:${data}');
+    var gobalServeice = Get.find<GlobalService>();
+    print(" Get.find<GlobalService>(),${gobalServeice.global}");
     InfoProvider.queryBzd().then((value) {
       print('change(value, status: RxStatus.success())');
       change(value, status: RxStatus.success());

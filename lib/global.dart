@@ -5,6 +5,8 @@ import '/common/store/store.dart';
 import '/common/utils/utils.dart';
 import 'package:get/get.dart';
 
+import 'common/services/global.dart';
+
 /// 全局静态数据
 class Global {
   /// 初始化
@@ -19,6 +21,7 @@ class Global {
 
     Get.put<ConfigStore>(ConfigStore());
     Get.put<UserStore>(UserStore());
+    await Get.putAsync(() => GlobalService().init());
   }
 
   static void setSystemUi() {
