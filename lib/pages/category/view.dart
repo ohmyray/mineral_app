@@ -16,12 +16,13 @@ class CategoryPage extends GetView<CategoryController> {
     final panelHeightClosed = MediaQuery.of(context).size.height * 0.04;
     final panelHeightOpen = MediaQuery.of(context).size.height * 1;
     Size size = MediaQuery.of(context).size;
-
+    var data = Get.arguments;
+    String type = data['type'] ?? "";
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.purple,
-        title: const Text(
-          '资源储量',
+        title: Text(
+          "$type",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
         ),
         leading: GestureDetector(
@@ -49,7 +50,7 @@ class CategoryPage extends GetView<CategoryController> {
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 120),
                 child: Center(
                     child: SfCircularChart(
-                  title: ChartTitle(text: '资源储量'),
+                  title: ChartTitle(text: "$type"),
                   legend: Legend(
                     isVisible: true,
                     overflowMode: LegendItemOverflowMode.wrap,

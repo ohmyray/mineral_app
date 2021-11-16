@@ -158,7 +158,7 @@ class ApplicationPage extends GetView<ApplicationController> {
                               GestureDetector(
                                 onTap: () {
                                   print('分类统计');
-                                  controller.toNamed(AppRoutes.Category);
+                                  Get.toNamed(AppRoutes.Statistics);
                                 },
                                 child: shortCardButton(
                                     Colors.amber, '分类统计', Icons.book_rounded),
