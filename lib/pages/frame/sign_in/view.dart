@@ -64,7 +64,7 @@ class SignInPage extends GetView<SignInController> {
             ),
           ),
           Text(
-            "矿场资源",
+            "矿产资源",
             textAlign: TextAlign.center,
             style: TextStyle(
               color: AppColors.primaryText,

@@ -10,31 +10,43 @@ class SignUpPage extends GetView<SignUpController> {
   // logo
   Widget _buildLogo() {
     return Container(
-      margin: EdgeInsets.only(top: 50.h),
+      width: 110.w,
+      margin: EdgeInsets.only(top: (40 + 44.0).h), // 顶部系统栏 44px
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Positioned(
-            left: 0,
-            top: 0,
-            right: 0,
-            child: Container(
-              // height: 76.w,
-              decoration: BoxDecoration(
-                color: AppColors.primaryBackground,
-                boxShadow: const [
-                  Shadows.primaryShadow,
-                ],
-                borderRadius:
-                    BorderRadius.all(Radius.circular((76 * 0.5).w)), // 父容器的50%
-              ),
-              child: Container(),
-            ),
-          ),
-          Positioned(
-            top: 13.w,
-            child: Image.asset(
-              "assets/images/logo.png",
-              fit: BoxFit.none,
+          Container(
+            height: 76.w,
+            width: 76.w,
+            margin: EdgeInsets.symmetric(horizontal: 15.w),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Positioned(
+                  left: 0,
+                  top: 0,
+                  right: 0,
+                  child: Container(
+                    height: 76.w,
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryBackground,
+                      boxShadow: const [
+                        Shadows.primaryShadow,
+                      ],
+                      borderRadius: BorderRadius.all(
+                          Radius.circular((76 * 0.5).w)), // 父容器的50%
+                    ),
+                    child: Container(),
+                  ),
+                ),
+                Positioned(
+                  top: 13.w,
+                  child: Image.asset(
+                    "assets/images/logo.png",
+                    fit: BoxFit.none,
+                  ),
+                ),
+              ],
             ),
           ),
           Container(
@@ -52,13 +64,13 @@ class SignUpPage extends GetView<SignUpController> {
             ),
           ),
           Text(
-            "注 册",
+            "矿产资源",
             textAlign: TextAlign.center,
             style: TextStyle(
               color: AppColors.primaryText,
-              fontFamily: "Montserrat",
-              fontWeight: FontWeight.w600,
-              fontSize: 24.sp,
+              fontFamily: "Avenir",
+              fontWeight: FontWeight.w400,
+              fontSize: 16.sp,
               height: 1,
             ),
           ),
@@ -152,29 +164,28 @@ class SignUpPage extends GetView<SignUpController> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: transparentAppBar(
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: AppColors.primaryText,
-          ),
-          onPressed: controller.handleNavPop,
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(
-              Icons.info_outline,
-              color: AppColors.primaryText,
-            ),
-            onPressed: controller.handleTip,
-          )
-        ],
-      ),
+      // appBar: transparentAppBar(
+      //   leading: IconButton(
+      //     icon: const Icon(
+      //       Icons.arrow_back,
+      //       color: AppColors.primaryText,
+      //     ),
+      //     onPressed: controller.handleNavPop,
+      //   ),
+      //   actions: <Widget>[
+      //     IconButton(
+      //       icon: const Icon(
+      //         Icons.info_outline,
+      //         color: AppColors.primaryText,
+      //       ),
+      //       onPressed: controller.handleTip,
+      //     )
+      //   ],
+      // ),
       body: SafeArea(
         child: Center(
           child: Column(
             children: <Widget>[
-              const Divider(height: 1),
               _buildLogo(),
               _buildInputForm(),
               const Spacer(),
