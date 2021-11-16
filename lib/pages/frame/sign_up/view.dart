@@ -170,15 +170,17 @@ class SignUpPage extends GetView<SignUpController> {
           )
         ],
       ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            const Divider(height: 1),
-            _buildLogo(),
-            _buildInputForm(),
-            const Spacer(),
-            _buildHaveAccountButton(),
-          ],
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              const Divider(height: 1),
+              _buildLogo(),
+              _buildInputForm(),
+              const Spacer(),
+              _buildHaveAccountButton(),
+            ],
+          ),
         ),
       ),
     );

@@ -9,4 +9,5 @@ class AppRoutes {
   static const Mineral_Info = '/mineral_info';
   static const Theme_Search = '/theme_search';
   static const MapInfo = '/info';
+  static const Category = '/category';
 }
