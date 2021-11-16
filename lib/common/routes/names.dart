@@ -10,4 +10,5 @@ class AppRoutes {
   static const Theme_Search = '/theme_search';
   static const MapInfo = '/info';
   static const Category = '/category';
+  static const Statistics = '/statistics';
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mineral_app/pages/statistics/index.dart';
 import '/pages/category/index.dart';
 import '/pages/info/index.dart';
 import '/pages/theme_search/index.dart';
@@ -55,6 +56,11 @@ class AppPages {
       name: AppRoutes.Category, // '/info'
       page: () => CategoryPage(),
       binding: CategoryBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.Statistics, // '/info'
+      page: () => StatisticsPage(),
+      binding: StatisticsBinding(),
     ),
     GetPage(
       name: AppRoutes.Mineral_Info,
