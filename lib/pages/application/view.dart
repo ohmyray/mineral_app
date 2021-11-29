@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:mineral_app/common/services/global.dart';
+import 'package:mineral_app/common/style/color.dart';
 import '/common/routes/routes.dart';
 import '/common/widgets/card.dart';
 import '/common/values/values.dart';
@@ -18,7 +20,9 @@ class ApplicationPage extends GetView<ApplicationController> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Obx(() => Scaffold(
+        resizeToAvoidBottomInset: false,
         // appBar: _buildAppBar(),
+        floatingActionButton: buildSpeedDial(controller, global),
         bottomNavigationBar: CustomBottomNavigationBar(
           backgroundColor: context.theme.scaffoldBackgroundColor,
           itemColor: context.theme.colorScheme.secondary,
@@ -33,12 +37,12 @@ class ApplicationPage extends GetView<ApplicationController> {
               label: "一张图".tr,
             ),
             CustomBottomNavigationItem(
-              icon: Icons.assignment_outlined,
-              label: "分析".tr,
-            ),
-            CustomBottomNavigationItem(
               icon: Icons.chat_outlined,
               label: "统计".tr,
+            ),
+            CustomBottomNavigationItem(
+              icon: Icons.assignment_outlined,
+              label: "分析".tr,
             ),
             // CustomBottomNavigationItem(
             //   icon: Icons.person_outline,
@@ -49,7 +53,7 @@ class ApplicationPage extends GetView<ApplicationController> {
         body: IndexedStack(
           index: controller.state.page,
           children: [
-            buildFlutterMap(global, controller),
+            buildFlutterMap(global, controller, size),
             Container(
               child: Text('1'),
             ),
@@ -62,60 +66,149 @@ class ApplicationPage extends GetView<ApplicationController> {
   }
 }
 
-Widget buildFlutterMap(global, controller) {
-  return FlutterMap(
-    options: MapOptions(
-        center: global.currentLocation,
-        zoom: 15.0,
-        onTap: (tapPosition, point) {
-          print('$tapPosition,$point');
-          print('$controller.state.point,$point');
-        },
-        plugins: [],
-        onMapCreated: (mapController) async {
-          // controller.state.mapController = mapController;
-        }),
-    layers: [
-      TileLayerOptions(
-        urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-        subdomains: ['a', 'b', 'c'],
-        attributionBuilder: (_) {
-          return Text("Mineral");
-        },
-      ),
-      MarkerLayerOptions(
-        markers: [
-          Marker(
-            width: 80.0,
-            height: 80.0,
-            point: global.currentLocation,
-            builder: (ctx) => const Icon(
-              Icons.location_on,
-              color: Colors.red,
-              size: 40.0,
+Widget buildFlutterMap(
+    GlobalService global, ApplicationController controller, Size size) {
+  return Stack(children: [
+    FlutterMap(
+      options: MapOptions(
+          center: global.currentLocation,
+          zoom: 15.0,
+          onTap: (tapPosition, point) {
+            print('$tapPosition,$point');
+            print('$controller.state.point,$point');
+          },
+          plugins: [],
+          onMapCreated: (mapController) async {
+            // controller.state.mapController = mapController;
+          }),
+      layers: [
+        TileLayerOptions(
+          urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+          subdomains: ['a', 'b', 'c'],
+          attributionBuilder: (_) {
+            return Text("Mineral");
+          },
+        ),
+        MarkerLayerOptions(
+          markers: [
+            Marker(
+              width: 80.0,
+              height: 80.0,
+              point: global.currentLocation,
+              builder: (ctx) => const Icon(
+                Icons.location_on,
+                color: Colors.red,
+                size: 40.0,
+              ),
+            ),
+            // ...controller.state.bzdListMarker
+          ],
+        ),
+        // MarkerClusterLayerOptions(
+        //   maxClusterRadius: 120,
+        //   size: Size(40, 40),
+        //   fitBoundsOptions: const FitBoundsOptions(
+        //     padding: EdgeInsets.all(50),
+        //   ),
+        //   markers: controller.state.bzdListMarker,
+        //   // polygonOptions: PolygonOptions(
+        //   //     borderColor: Colors.blueAccent,
+        //   //     color: Colors.black12,
+        //   //     borderStrokeWidth: 3),
+        //   builder: (context, markers) {
+        //     return FloatingActionButton(
+        //       child: Text(markers.length.toString()),
+        //       onPressed: null,
+        //     );
+        //   },
+        // ),
+      ],
+    ),
+    Padding(
+      padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 8.0),
+      child: Column(
+        children: [
+          Card(
+            child: Container(
+              height: 60,
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.symmetric(horizontal: 5),
+              child: Row(
+                children: <Widget>[
+                  IconButton(
+                      icon: const Icon(Icons.search, color: MyColors.grey_60),
+                      onPressed: () {}),
+                  Expanded(
+                    child: TextField(
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration.collapsed(hintText: '搜索矿区'),
+                      controller: controller.searchController,
+                      onSubmitted: (value) {
+                        print('开始搜索');
+                      },
+                    ),
+                  ),
+                  Text('当前矿区'),
+                  IconButton(
+                      icon: const Icon(Icons.menu, color: MyColors.grey_60),
+                      onPressed: () {}),
+                ],
+              ),
             ),
           ),
-          // ...controller.state.bzdListMarker
         ],
       ),
-      // MarkerClusterLayerOptions(
-      //   maxClusterRadius: 120,
-      //   size: Size(40, 40),
-      //   fitBoundsOptions: const FitBoundsOptions(
-      //     padding: EdgeInsets.all(50),
-      //   ),
-      //   markers: controller.state.bzdListMarker,
-      //   // polygonOptions: PolygonOptions(
-      //   //     borderColor: Colors.blueAccent,
-      //   //     color: Colors.black12,
-      //   //     borderStrokeWidth: 3),
-      //   builder: (context, markers) {
-      //     return FloatingActionButton(
-      //       child: Text(markers.length.toString()),
-      //       onPressed: null,
-      //     );
-      //   },
-      // ),
-    ],
-  );
+    )
+  ]);
+}
+
+Widget buildSpeedDial(ApplicationController controller, GlobalService global) {
+  if (controller.state.page == 0) {
+    return SpeedDial(
+      elevation: 2,
+      animatedIcon: AnimatedIcons.menu_close,
+      animatedIconTheme: IconThemeData(color: Colors.white),
+      curve: Curves.linear,
+      animationSpeed: 100,
+      overlayColor: Colors.black,
+      overlayOpacity: 0.2,
+      backgroundColor: MyColors.primary,
+      children: [
+        SpeedDialChild(
+          elevation: 2,
+          label: "空间分析",
+          child: Icon(Icons.space_bar_outlined, color: MyColors.grey_80),
+          backgroundColor: Colors.white,
+          onTap: () {
+            controller.changePage(2);
+            global.backPage = 0;
+          },
+        ),
+        SpeedDialChild(
+          elevation: 2,
+          label: "资源统计",
+          child: Icon(Icons.summarize_outlined, color: MyColors.grey_80),
+          backgroundColor: Colors.white,
+          onTap: () {
+            controller.changePage(1);
+            global.backPage = 0;
+          },
+        ),
+        SpeedDialChild(
+          elevation: 2,
+          label: "详细信息",
+          child: Icon(Icons.all_inbox_outlined, color: MyColors.grey_80),
+          backgroundColor: Colors.white,
+          onTap: () {},
+        ),
+        SpeedDialChild(
+          elevation: 2,
+          label: "基本信息",
+          child: Icon(Icons.info_outline, color: MyColors.grey_80),
+          backgroundColor: Colors.white,
+          onTap: () {},
+        ),
+      ],
+    );
+  }
 }

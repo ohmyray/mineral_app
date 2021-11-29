@@ -14,6 +14,7 @@ class ApplicationController extends GetxController {
   /// 响应式成员变量
 
   final state = ApplicationState();
+  final TextEditingController searchController = TextEditingController();
 
   /// 生命周期
 

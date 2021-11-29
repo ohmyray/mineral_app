@@ -78,6 +78,9 @@ dependencies:
   # 图表
   syncfusion_flutter_charts: ^19.3.53
 
+  # 按钮
+  flutter_speed_dial: 4.6.6
+
 
 dev_dependencies:
   flutter_test:

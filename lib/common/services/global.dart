@@ -14,6 +14,10 @@ class GlobalService extends GetxService {
   set currentLocation(value) => _currentLocation.value = value;
   get currentLocation => _currentLocation.value;
 
+  final _backPage = RxInt(-1);
+  set backPage(value) => _backPage.value = value;
+  get backPage => _backPage.value;
+
   Future<GlobalService> init() async {
     var response = await Helper.getJsonFile('assets/dbfile/mapper.json');
     global.value = response;
