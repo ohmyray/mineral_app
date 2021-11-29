@@ -4,6 +4,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:mineral_app/common/services/global.dart';
 import 'package:mineral_app/common/style/color.dart';
+import 'package:mineral_app/pages/map/index.dart';
 import '/common/routes/routes.dart';
 import '/common/widgets/card.dart';
 import '/common/values/values.dart';
@@ -16,6 +17,7 @@ import 'index.dart';
 
 class ApplicationPage extends GetView<ApplicationController> {
   GlobalService global = Get.find<GlobalService>();
+  AMapController aMapController = Get.find<AMapController>();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -53,7 +55,7 @@ class ApplicationPage extends GetView<ApplicationController> {
         body: IndexedStack(
           index: controller.state.page,
           children: [
-            buildFlutterMap(global, controller, size),
+            buildFlutterMap(global, controller, size, aMapController),
             Container(
               child: Text('1'),
             ),
@@ -66,8 +68,8 @@ class ApplicationPage extends GetView<ApplicationController> {
   }
 }
 
-Widget buildFlutterMap(
-    GlobalService global, ApplicationController controller, Size size) {
+Widget buildFlutterMap(GlobalService global, ApplicationController controller,
+    Size size, AMapController aMapController) {
   return Stack(children: [
     FlutterMap(
       options: MapOptions(
@@ -101,7 +103,7 @@ Widget buildFlutterMap(
                 size: 40.0,
               ),
             ),
-            // ...controller.state.bzdListMarker
+            ...aMapController.state.bzdListMarker
           ],
         ),
         // MarkerClusterLayerOptions(
@@ -149,13 +151,52 @@ Widget buildFlutterMap(
                     ),
                   ),
                   Text('当前矿区'),
-                  IconButton(
-                      icon: const Icon(Icons.menu, color: MyColors.grey_60),
-                      onPressed: () {}),
+                  PopupMenuButton<String>(
+                    // key: _menuKey,
+                    icon: const Icon(Icons.outlined_flag,
+                        color: MyColors.grey_60),
+                    onSelected: (String value) {
+                      // showToastClicked(context, value);
+                    },
+                    itemBuilder: (context) => [
+                      PopupMenuItem(
+                        value: "Search",
+                        child: Text("Search"),
+                      ),
+                      PopupMenuItem(
+                        value: "Refresh",
+                        child: Text("Refresh"),
+                      ),
+                      PopupMenuItem(
+                        value: "Settings",
+                        child: Text("Settings"),
+                      ),
+                      PopupMenuItem(
+                        value: "Send feedback",
+                        child: Text("Send feedback"),
+                      ),
+                      PopupMenuItem(
+                        value: "Help",
+                        child: Text("Help"),
+                      ),
+                      PopupMenuItem(
+                        value: "Signout",
+                        child: Text("Signout"),
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Card(
+                child: IconButton(icon: Icon(Icons.layers_outlined)),
+              )
+            ],
+          )
         ],
       ),
     )
