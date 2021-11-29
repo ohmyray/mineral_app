@@ -64,6 +64,7 @@ class AMapController extends GetxController {
               KclKsModel kclKs =
                   await state.kclKsProvider.getById("'${column.KQBH}'");
               state.currentTapMarker = kclKs;
+              state.renderPanelSheet = true;
               // togglePanelStatus();
             },
             icon: const Icon(

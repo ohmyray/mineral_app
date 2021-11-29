@@ -22,6 +22,11 @@ class AMapState {
   final RxDouble _offsetDistance = 0.0.obs;
   final RxDouble _offsetY = 0.0.obs;
 
+  final RxBool _renderPanelSheet = false.obs;
+
+  get renderPanelSheet => _renderPanelSheet.value;
+  set renderPanelSheet(value) => _renderPanelSheet.value = value;
+
   get currentTapMarker => _currentTapMarker.value;
   set currentTapMarker(value) => _currentTapMarker.value = value;
 

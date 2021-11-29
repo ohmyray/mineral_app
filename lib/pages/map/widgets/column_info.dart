@@ -18,19 +18,19 @@ Widget buildColInfo(title, value) {
 Widget buildViewInfo(kqbh) {
   return Row(
     children: const <Widget>[
-      Expanded(
-        child: Text(''), // 中间用Expanded控件
-      ),
-      SizedBox(
-        width: 10,
-        height: 40,
-      ),
-      Text(
-        '查看矿区详情',
-        style: TextStyle(
-          color: Colors.blueAccent,
-        ),
-      )
+      // Expanded(
+      //   child: Text(''), // 中间用Expanded控件
+      // ),
+      // SizedBox(
+      //   width: 10,
+      //   height: 40,
+      // ),
+      // Text(
+      //   '查看矿区详情',
+      //   style: TextStyle(
+      //     color: Colors.blueAccent,
+      //   ),
+      // )
     ],
   );
 }

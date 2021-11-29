@@ -4,7 +4,9 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:mineral_app/common/services/global.dart';
 import 'package:mineral_app/common/style/color.dart';
+import 'package:mineral_app/database/model/model.dart';
 import 'package:mineral_app/pages/map/index.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '/common/routes/routes.dart';
 import '/common/widgets/card.dart';
 import '/common/values/values.dart';
@@ -12,6 +14,8 @@ import '/common/widgets/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import 'analysis.dart';
+import 'category.dart';
 import 'custom_bottom_nav_bar.dart';
 import 'index.dart';
 
@@ -21,7 +25,10 @@ class ApplicationPage extends GetView<ApplicationController> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Obx(() => Scaffold(
+    final panelHeightClosed = MediaQuery.of(context).size.height * 0.035;
+    final panelHeightOpen = MediaQuery.of(context).size.height * 0.4;
+    return Obx(
+      () => Scaffold(
         resizeToAvoidBottomInset: false,
         // appBar: _buildAppBar(),
         floatingActionButton: buildSpeedDial(controller, global),
@@ -32,6 +39,9 @@ class ApplicationPage extends GetView<ApplicationController> {
           currentIndex: controller.state.page,
           onChange: (index) {
             controller.changePage(index);
+            global.backPage = -1;
+
+            print('controller.changePage(index) ${global.backPage} ${index}');
           },
           children: [
             CustomBottomNavigationItem(
@@ -52,19 +62,44 @@ class ApplicationPage extends GetView<ApplicationController> {
             // ),
           ],
         ),
-        body: IndexedStack(
-          index: controller.state.page,
-          children: [
-            buildFlutterMap(global, controller, size, aMapController),
-            Container(
-              child: Text('1'),
-            ),
-            Container(
-              child: Text('2'),
-            ),
-          ],
-          // bottomNavigationBar: _buildBottomNavigationBar(),
-        )));
+        body: SlidingUpPanel(
+          body: IndexedStack(
+            index: controller.state.page,
+            children: [
+              buildFlutterMap(global, controller, size, aMapController),
+              // Container(child: Text('1')),
+              // Container(child: Text('2')),
+              buildCategory(),
+              buildAnalysis(),
+            ],
+            // bottomNavigationBar: _buildBottomNavigationBar(),
+          ),
+          panelBuilder: (panelBuilderController) =>
+              Obx(() => aMapController.state.currentTapMarker is KclKsModel
+                  ? aMapController.state.renderPanelSheet
+                      ? PanelWidget(
+                          controller: panelBuilderController,
+                          aMapController: aMapController,
+                        )
+                      : Container()
+                  : Container()),
+          onPanelSlide: (position) {
+            print('onPanelSlide$position ');
+          },
+          controller: aMapController.state.panelController,
+          minHeight: aMapController.state.currentTapMarker is KclKsModel
+              ? panelHeightClosed
+              : 0,
+          maxHeight: aMapController.state.currentTapMarker is KclKsModel
+              ? panelHeightOpen
+              : 0,
+          // parallaxEnabled: true,
+          parallaxOffset: .5,
+          renderPanelSheet: aMapController.state.renderPanelSheet,
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(18)),
+        ),
+      ),
+    );
   }
 }
 
@@ -78,10 +113,18 @@ Widget buildFlutterMap(GlobalService global, ApplicationController controller,
           onTap: (tapPosition, point) {
             print('$tapPosition,$point');
             print('$controller.state.point,$point');
+
+            if (aMapController.state.panelController.isPanelOpen == true) {
+              aMapController.state.panelController.close();
+            }
+            aMapController.state.currentTapMarker = null;
+            Future.delayed(Duration(microseconds: 200), () {
+              aMapController.state.renderPanelSheet = false;
+            });
           },
           plugins: [],
           onMapCreated: (mapController) async {
-            // controller.state.mapController = mapController;
+            aMapController.state.mapController = mapController;
           }),
       layers: [
         TileLayerOptions(
