@@ -16,7 +16,7 @@ import '/common/middlewares/middlewares.dart';
 import 'routes.dart';
 
 class AppPages {
-  static const INITIAL = AppRoutes.INITIAL;
+  static const INITIAL = AppRoutes.Application;
   static final RouteObserver<Route> observer = RouteObservers();
   static List<String> history = [];
 

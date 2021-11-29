@@ -40,4 +40,8 @@ class ApplicationController extends GetxController {
   void toNamed(String routeName) {
     Get.toNamed(routeName);
   }
+
+  void changePage(int index) {
+    state.page = index;
+  }
 }

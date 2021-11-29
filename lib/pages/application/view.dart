@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:mineral_app/common/services/global.dart';
 import '/common/routes/routes.dart';
 import '/common/widgets/card.dart';
 import '/common/values/values.dart';
@@ -6,262 +9,113 @@ import '/common/widgets/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import 'custom_bottom_nav_bar.dart';
 import 'index.dart';
 
 class ApplicationPage extends GetView<ApplicationController> {
-  // 顶部导航
-  // AppBar _buildAppBar() {
-  //   return transparentAppBar(
-  //       title: Obx(() => Text(
-  //             "1231231",
-  //             style: TextStyle(
-  //               color: AppColors.primaryText,
-  //               fontFamily: 'Montserrat',
-  //               fontSize: 18.sp,
-  //               fontWeight: FontWeight.w600,
-  //             ),
-  //           )),
-  //       actions: <Widget>[
-  //         IconButton(
-  //           icon: Icon(
-  //             Icons.search,
-  //             color: AppColors.primaryText,
-  //           ),
-  //           onPressed: () {},
-  //         )
-  //       ]);
-  // }
-
-  // 内容页
-  Widget _buildPageView(Size size) {
-    // return ListView(
-    //   physics: NeverScrollableScrollPhysics(),
-    //   children: <Widget>[
-    //     GestureDetector(
-    //       onTap: () {
-    //         print('资源一张图');
-    //         controller.toNamed(AppRoutes.Map);
-    //       },
-    //       child: cardWidget('资源一张图', 100, 100),
-    //     ),
-    //     GestureDetector(
-    //       onTap: () {
-    //         print('专题查询');
-    //         controller.toNamed(AppRoutes.Theme_Search);
-    //       },
-    //       child: cardWidget('专题查询', 100, 100),
-    //     ),
-    //     GestureDetector(
-    //       onTap: () {
-    //         print('分类统计');
-    //       },
-    //       child: cardWidget('分类统计', 100, 100),
-    //     ),
-    //     GestureDetector(
-    //       onTap: () {
-    //         print('空间分析');
-    //       },
-    //       child: cardWidget('空间分析', 100, 100),
-    //     ),
-    //   ],
-    //   // controller: controller.pageController,
-    //   // onPageChanged: controller.handlePageChanged,
-    // );
-    return Stack(
-      children: [
-        Container(
-          padding: const EdgeInsets.only(left: 24),
-          height: size.height,
-          width: size.width,
-          decoration: const BoxDecoration(
-            color: AppColors.purple,
-          ),
-          child: SafeArea(
-            child: Align(
-              alignment: Alignment.topCenter,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Image.asset('assets/images/logo.png'),
-                      const SizedBox(width: 16),
-                      const Text(
-                        'MINERAL',
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white),
-                      ),
-                      const SizedBox(width: 16),
-                    ],
-                  ),
-                  const Text('矿产资源',
-                      style: TextStyle(
-                          fontSize: 32,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white))
-                ],
-              ),
-            ),
-          ),
-        ),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-            height: size.height - size.height / 5,
-            width: size.width,
-            decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(34)),
-            child: Column(
-              children: [
-                Row(
-                  children: const [
-                    // Text('资源一张图'),
-                    SizedBox(width: 34),
-                    // Text('专题查询'),
-                    SizedBox(width: 34),
-                    // Text('分类统计'),
-                    SizedBox(width: 34),
-                    // Text('空间分析'),
-                  ],
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 6, vertical: 8),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        children: [
-                          Row(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  controller.toNamed(AppRoutes.Map);
-                                },
-                                child: shortCardButton(
-                                    Colors.teal, '资源一张图', Icons.map_rounded),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  controller.toNamed(AppRoutes.Theme_Search);
-                                },
-                                child: shortCardButton(
-                                    Colors.deepOrange, '专题查询', Icons.three_mp),
-                              )
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  print('分类统计');
-                                  Get.toNamed(AppRoutes.Statistics);
-                                },
-                                child: shortCardButton(
-                                    Colors.amber, '分类统计', Icons.book_rounded),
-                              ),
-                              GestureDetector(
-                                onTap: () {},
-                                child: shortCardButton(Colors.redAccent, '空间分析',
-                                    Icons.analytics_rounded),
-                              )
-                            ],
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-        )
-      ],
-    );
-  }
-
+  GlobalService global = Get.find<GlobalService>();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      // appBar: _buildAppBar(),
-      body: _buildPageView(size),
-      // bottomNavigationBar: _buildBottomNavigationBar(),
-    );
+    return Obx(() => Scaffold(
+        // appBar: _buildAppBar(),
+        bottomNavigationBar: CustomBottomNavigationBar(
+          backgroundColor: context.theme.scaffoldBackgroundColor,
+          itemColor: context.theme.colorScheme.secondary,
+          // currentIndex: controller.currentIndex.value,
+          currentIndex: controller.state.page,
+          onChange: (index) {
+            controller.changePage(index);
+          },
+          children: [
+            CustomBottomNavigationItem(
+              icon: Icons.home_outlined,
+              label: "一张图".tr,
+            ),
+            CustomBottomNavigationItem(
+              icon: Icons.assignment_outlined,
+              label: "分析".tr,
+            ),
+            CustomBottomNavigationItem(
+              icon: Icons.chat_outlined,
+              label: "统计".tr,
+            ),
+            // CustomBottomNavigationItem(
+            //   icon: Icons.person_outline,
+            //   label: "Account".tr,
+            // ),
+          ],
+        ),
+        body: IndexedStack(
+          index: controller.state.page,
+          children: [
+            buildFlutterMap(global, controller),
+            Container(
+              child: Text('1'),
+            ),
+            Container(
+              child: Text('2'),
+            ),
+          ],
+          // bottomNavigationBar: _buildBottomNavigationBar(),
+        )));
   }
 }
 
-Widget shortCardButton(color, title, icon) {
-  return Container(
-    width: 145,
-    height: 196,
-    decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: Colors.white, width: 10),
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 50,
-            color: const Color(0xFF0B0C2A).withOpacity(.09),
-            offset: const Offset(10, 10),
-          )
-        ]),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        const SizedBox(
-          height: 12,
-        ),
-        Text(
-          title,
-          style: const TextStyle(color: Colors.white),
-        ),
-        Expanded(
-            child: Icon(
-          icon,
-          size: 54,
-          color: Colors.white,
-        ))
-      ],
-    ),
-  );
-}
-
-Widget longCardButton(color, title) {
-  return Container(
-    width: 155,
-    height: 163,
-    decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: Colors.white, width: 10),
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 50,
-            color: const Color(0xFF0B0C2A).withOpacity(.09),
-            offset: const Offset(10, 10),
-          )
-        ]),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        const SizedBox(
-          height: 12,
-        ),
-        Text(
-          title,
-          style: const TextStyle(color: Colors.white),
-        ),
-        const Expanded(
-            child: Icon(
-          Icons.map_rounded,
-          size: 54,
-          color: Colors.white,
-        ))
-      ],
-    ),
+Widget buildFlutterMap(global, controller) {
+  return FlutterMap(
+    options: MapOptions(
+        center: global.currentLocation,
+        zoom: 15.0,
+        onTap: (tapPosition, point) {
+          print('$tapPosition,$point');
+          print('$controller.state.point,$point');
+        },
+        plugins: [],
+        onMapCreated: (mapController) async {
+          // controller.state.mapController = mapController;
+        }),
+    layers: [
+      TileLayerOptions(
+        urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        subdomains: ['a', 'b', 'c'],
+        attributionBuilder: (_) {
+          return Text("Mineral");
+        },
+      ),
+      MarkerLayerOptions(
+        markers: [
+          Marker(
+            width: 80.0,
+            height: 80.0,
+            point: global.currentLocation,
+            builder: (ctx) => const Icon(
+              Icons.location_on,
+              color: Colors.red,
+              size: 40.0,
+            ),
+          ),
+          // ...controller.state.bzdListMarker
+        ],
+      ),
+      // MarkerClusterLayerOptions(
+      //   maxClusterRadius: 120,
+      //   size: Size(40, 40),
+      //   fitBoundsOptions: const FitBoundsOptions(
+      //     padding: EdgeInsets.all(50),
+      //   ),
+      //   markers: controller.state.bzdListMarker,
+      //   // polygonOptions: PolygonOptions(
+      //   //     borderColor: Colors.blueAccent,
+      //   //     color: Colors.black12,
+      //   //     borderStrokeWidth: 3),
+      //   builder: (context, markers) {
+      //     return FloatingActionButton(
+      //       child: Text(markers.length.toString()),
+      //       onPressed: null,
+      //     );
+      //   },
+      // ),
+    ],
   );
 }
