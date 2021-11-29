@@ -192,8 +192,11 @@ Widget buildFlutterMap(GlobalService global, ApplicationController controller,
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
+              ...buildLayersCard(controller.state.isLayerFold),
               Card(
-                child: IconButton(icon: Icon(Icons.layers_outlined)),
+                child: IconButton(
+                    onPressed: () => controller.toggleLayerFold(),
+                    icon: Icon(Icons.layers_outlined)),
               )
             ],
           )
@@ -201,6 +204,17 @@ Widget buildFlutterMap(GlobalService global, ApplicationController controller,
       ),
     )
   ]);
+}
+
+List<Widget> buildLayersCard(layerFold) {
+  if (layerFold) {
+    return [
+      Card(child: IconButton(icon: Icon(Icons.map_outlined))),
+      Card(child: IconButton(icon: Icon(Icons.maps_home_work_outlined))),
+    ];
+  } else {
+    return [];
+  }
 }
 
 Widget buildSpeedDial(ApplicationController controller, GlobalService global) {

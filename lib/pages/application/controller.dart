@@ -45,4 +45,8 @@ class ApplicationController extends GetxController {
   void changePage(int index) {
     state.page = index;
   }
+
+  void toggleLayerFold() {
+    state.isLayerFold = !state.isLayerFold;
+  }
 }
