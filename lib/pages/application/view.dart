@@ -265,12 +265,12 @@ Widget buildSpeedDial(ApplicationController controller, GlobalService global) {
     return SpeedDial(
       elevation: 2,
       animatedIcon: AnimatedIcons.menu_close,
-      animatedIconTheme: IconThemeData(color: Colors.white),
+      animatedIconTheme: IconThemeData(color: AppColors.secondaryElementText),
       curve: Curves.linear,
       animationSpeed: 100,
       overlayColor: Colors.black,
       overlayOpacity: 0.2,
-      backgroundColor: MyColors.primary,
+      backgroundColor: AppColors.primaryBackground,
       children: [
         SpeedDialChild(
           elevation: 2,
