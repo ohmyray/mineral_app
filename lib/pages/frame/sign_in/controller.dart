@@ -134,6 +134,7 @@ class SignInController extends GetxController {
     if (userProfile.code == 1000 && userProfile.message == '保存失败') {
       EasyLoading.showError(userProfile.result);
     } else {
+      UserStore.to.setToken(userProfile.result['token']);
       UserStore.to.saveProfile(userProfile);
       Get.offAndToNamed(AppRoutes.Application);
     }

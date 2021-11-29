@@ -35,6 +35,15 @@ class UserAPI {
     return UserInitResponseEntity.fromJson(response);
   }
 
+  static Future<void> locationAdd({
+    UserLocationRequestEntity params,
+  }) async {
+    var response = await HttpUtil().post(
+      '/location/add',
+      data: params.toJson(),
+    );
+  }
+
   /// Profile
   static Future<UserLoginResponseEntity> profile() async {
     var response = await HttpUtil().post(

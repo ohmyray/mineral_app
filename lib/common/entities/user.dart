@@ -151,3 +151,52 @@ class UserInitResponseEntity {
         "result": result,
       };
 }
+
+class UserLocationResponseEntity {
+  int code;
+  String message;
+  dynamic result;
+
+  UserLocationResponseEntity({
+    this.code,
+    this.message,
+    this.result,
+  });
+
+  factory UserLocationResponseEntity.fromJson(Map<String, dynamic> json) =>
+      UserLocationResponseEntity(
+        code: json["code"],
+        message: json["message"],
+        result: json["result"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "code": code,
+        "message": message,
+        "result": result,
+      };
+}
+
+class UserLocationRequestEntity {
+  num lat;
+  num lng;
+  num time;
+  String userId;
+
+  UserLocationRequestEntity({this.lat, this.lng, this.time, this.userId});
+
+  // factory UserLocationRequestEntity.fromJson(Map<String, dynamic> json) =>
+  //     UserLocationRequestEntity(
+  //       lat: json["lat"],
+  //       lng: json["lng"],
+  //       time: DateTime.parse(json['time']),
+  //       userId: json["userId"],
+  //     );
+
+  Map<String, dynamic> toJson() => {
+        "lat": lat,
+        "lng": lng,
+        "time": time,
+        "userId": userId,
+      };
+}
